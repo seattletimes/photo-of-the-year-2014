@@ -101,13 +101,17 @@
       }
     }
 
-    img {
+    .image {
       cursor: pointer;
-      width: 100%;
+      height: 150px;
       opacity: .4;
+      background-position: center;
+      background-size: 140%;
 
       @media @mobile { 
         opacity: 1;
+        width: 50%;
+        display: inline-block;
       }
       // max-height: 500px;
 
@@ -143,16 +147,13 @@
     float: left;
 
     @media @mobile {
-      position: absolute;
-      top: 180px;
+      position: fixed;
+      top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       display: none;
-
-      .close {
-        display: block;
-      }
+      background: @charcoal;
 
       .hero img { 
         max-width: 100%;
@@ -176,6 +177,10 @@
       font-size: 25px;
       padding: 0 8px 5px 8px;
       cursor: pointer;
+
+      @media @mobile {
+        display: block;
+      }
     }
 
     .content {

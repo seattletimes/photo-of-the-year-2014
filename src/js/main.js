@@ -18,7 +18,6 @@ app.controller("PhotoController", ["$scope", "$filter", function($scope, $filter
   var setHero = $scope.setHero = function(photo) {
     $scope.uiState.hero = photo;
     $scope.uiState.heroIndex = $scope.photos.indexOf(photo);
-    $scope.gotoAnchor(photo.id);
   };
 
   $scope.$watch("tags", function() {

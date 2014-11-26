@@ -63,12 +63,12 @@
           </div>
 
           <div class="images">
-            <img
-              ng-class="{ current: photo == uiState.hero }" 
-              ng-repeat="photo in photos"
-              ng-src="/assets/{{photo.image}}"
-              ng-click="setHero(photo)">
-          </div>
+            <div
+              ng-repeat="photo in photos" 
+              ng-style="{'background-image': 'url(/assets/{{photo.image}})'}"
+              ng-click="setHero(photo)"
+              ng-class="{ current: photo == uiState.hero, image: true }" >
+            </div>
         </div>
       </div>
     </div>

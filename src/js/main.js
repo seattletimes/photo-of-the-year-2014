@@ -37,9 +37,6 @@ app.controller("PhotoController", ["$scope", function($scope) {
     var photos = playlists[$scope.filter.playlist];
     var stream = streamFilter(photos, $scope.filter.tags);
     $scope.photos = stream;
-    if (!isMobile()) {
-      setHero(stream[0]);
-    }
   };
 
   var getTags = function(o) {

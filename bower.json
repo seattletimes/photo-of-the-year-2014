@@ -1,0 +1,24 @@
+{
+  "name": "photo-test",
+  "version": "0.0.1",
+  "homepage": "https://github.com/seattletimes/photo-test",
+  "authors": [
+    "The Seattle Times"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "seattletimes-pym": "~1.0.0",
+    "angular": "~1.3.3"
+  }
+}

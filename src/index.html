@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <%= t.include("partials/_adHead.html") %>
+  </head>
+  <body ng-app="photo-test">
+    <div class="nav-bar">
+      <img class="logo" src="http://seattletimes.com/art/ui/seattletimeslogo_home.svg">
+    </div>
+
+    <div class="ad"></div>
+
+    <div class="title">2014 Pictures of the Year</div>
+
+    <div ng-controller="PhotoController">
+
+      <div class="container" ng-class="{ 'show-filter': showFilter, 'show-gallery': uiState.hero }">
+        <div class="filter">
+          <div class="inner">
+            <p><strong>Editor's Picks:</strong><br>
+              <input type="checkbox" id="default" ng-model="tags.default"><label for="default">Default</label><br>
+              <input type="checkbox" id="special" ng-model="tags.special"><label for="special">Special</label></p>
+
+            <p><strong>Topics:</strong><br>
+              <input type="checkbox" id="kittens" ng-model="tags.kittens"><label for="kittens">Kittens</label><br>
+              <input type="checkbox" id="seahawks" ng-model="tags.seahawks"><label for="seahawks">Seahawks</label></p>
+
+            <p><strong>Photographers:</strong><br>
+              <input type="checkbox" id="diane" ng-model="tags.diane"><label for="diane">Diane Arbus</label><br>
+              <input type="checkbox" id="ansel" ng-model="tags.ansel"><label for="ansel">Ansel Adams</label></p>
+            </div>
+        </div>
+
+        <div class="gallery" >
+          <div class="close" ng-click="clearHero()"><i class="fa fa-times-circle"></i></div>
+
+          <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)"></i>
+
+          <div class="content" ng-class="{portrait: uiState.hero.orientation == 'portrait'}">
+            <div class="hero">
+              <img ng-src="/assets/{{uiState.hero.image}}">
+            </div>
+
+            <div class="info">
+              <div class="photo-title"><strong>{{uiState.hero.title}}</strong> <em>({{uiState.hero.date}})</em></div>
+              <div class="description">{{uiState.hero.description}}</div>
+            </div>
+          </div>
+          
+          <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1
+          )"></i>
+        </div>
+
+        <div class="filmstrip">
+          <div class="filter-button" ng-click="showFilter = !showFilter">
+            <i class="fa fa-tags"></i> Viewing: {{ filterTitle() }}
+          </div>
+
+          <div class="images">
+            <img
+              ng-class="{ current: photo == uiState.hero }" 
+              ng-repeat="photo in photos"
+              ng-src="/assets/{{photo.image}}"
+              ng-click="setHero(photo)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad"></div>
+
+    <script>
+      <% csv.photos.forEach( function( photo ) { photo.tags = photo.tags.split( "," ) } ) %>
+      var photoData = <%= JSON.stringify( csv.photos ) %>;
+    </script>
+
+    <script src="app.js"></script>
+    <%= t.include("partials/_adFoot.html") %>
+    <%= t.include("partials/_workHere.html") %>
+  </body>
+</html>

@@ -37,24 +37,26 @@
             </div>
         </div>
 
-        <div class="gallery" >
-          <div class="close" ng-click="clearHero()"><i class="fa fa-times-circle"></i></div>
+        <div class="gallery">
+          <div class="inner">
+            <div class="close" ng-click="clearHero()"><i class="fa fa-times"></i></div>
 
-          <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="uiState.heroIndex > 0"></i>
+            <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="uiState.heroIndex > 0"></i>
 
-          <div class="content" ng-class="{portrait: uiState.hero.orientation == 'portrait'}">
-            <div class="hero">
-              <img ng-src="/assets/{{uiState.hero.image}}">
+            <div class="content" ng-class="{portrait: uiState.hero.orientation == 'portrait'}">
+              <div class="hero">
+                <img ng-src="/assets/{{uiState.hero.image}}">
+              </div>
+
+              <div class="info">
+                <div class="photo-title"><strong>{{uiState.hero.title}}</strong> <em>({{uiState.hero.date}})</em></div>
+                <div class="description">{{uiState.hero.description}}</div>
+              </div>
             </div>
-
-            <div class="info">
-              <div class="photo-title"><strong>{{uiState.hero.title}}</strong> <em>({{uiState.hero.date}})</em></div>
-              <div class="description">{{uiState.hero.description}}</div>
-            </div>
+            
+            <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1
+            )" ng-show="uiState.heroIndex < photos.length - 1"></i>
           </div>
-          
-          <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1
-          )" ng-show="uiState.heroIndex < photos.length - 1"></i>
         </div>
 
         <div class="filmstrip">

@@ -154,10 +154,15 @@
       height: 100%;
       display: none;
       background: @charcoal;
+      padding: 50px 15px 62px 15px;
 
-      .hero img { 
+      .inner {
+        overflow: scroll;
+        height: 100%;
+      }
+
+      .hero { 
         max-width: 100%;
-        padding-right: 0;
       }
 
       .info {
@@ -173,9 +178,9 @@
     .close {
       display: none;
       position: absolute;
-      right: 20px;
+      right: 12px;
+      top: 10px;
       font-size: 25px;
-      padding: 0 8px 5px 8px;
       cursor: pointer;
 
       @media @mobile {
@@ -206,10 +211,18 @@
         .hero {
           float: left;
           padding-right: 20px;
+
+          @media @mobile {
+            padding-right: 0;
+          }
         }
 
         .info {
           padding-top: 0;
+
+          @media @mobile {
+            padding-top: 15px;
+          }
         }
       }
     }
@@ -220,16 +233,30 @@
       top: 395px;
       cursor: pointer;
 
+      @media @mobile {
+        top: auto;
+        bottom: 20px;
+        cursor: pointer;
+      }
+
       &:hover {
         color: #FFC90D;
       }
 
       &.previous {
         left: 22px;
+
+        @media @mobile {
+          left: 42%;
+        }
       }
 
       &.next {
         right: 22px;
+
+        @media @mobile {
+          right: 42%;
+        }
       }
     }
   }

@@ -31,7 +31,7 @@
               <label for="special">Special</label>
 
               <input type="radio" name="playlist" id="all" ng-model="filter.playlist" value="all">
-              <label for="all">All</label>
+             <label for="all">All</label>
 
             <h2><i class="fa fa-tags"></i> Topics</h2>
               <input type="checkbox" id="kittens" ng-model="filter.tags.kittens">
@@ -87,7 +87,14 @@
     <div class="ad"></div>
 
     <script>
-      <% csv.photos.forEach( function( photo ) { photo.tags = photo.tags.split( "," ) } ) %>
+      <% csv.photos.forEach(function(photo) { 
+        photo.tags = photo.tags.split( "," );
+        if (!photo.curated) {
+          photo.curated = [];
+        } else {
+          photo.curated = photo.curated.split(",");
+        }
+      }); %>
       var photoData = <%= JSON.stringify( csv.photos ) %>;
     </script>
 

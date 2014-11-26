@@ -9,10 +9,14 @@ app.controller("PhotoController", ["$scope", function($scope) {
 
   var all = window.photoData;
   var playlists = {
-    default: all.slice(0, 3),
-    special: all.slice(3, 6),
     all: all
   };
+  all.forEach(function(photo) {
+    photo.curated.forEach(function(list) {
+      if (!playlists[list]) playlists[list] = [];
+      playlists[list].push(photo);
+    });
+  });
 
   $scope.ui = {
     showFilter: false,
@@ -29,24 +33,34 @@ app.controller("PhotoController", ["$scope", function($scope) {
     $scope.ui.heroIndex = $scope.photos.indexOf(photo);
   };
 
-  var setPhotos = function(stream) {
+  var getPhotos = function() {
+    var photos = playlists[$scope.filter.playlist];
+    var stream = streamFilter(photos, $scope.filter.tags);
     $scope.photos = stream;
     if (!isMobile()) {
       setHero(stream[0]);
     }
   };
 
-  $scope.$watch("filter", function(now, then) {
-    if (now.playlist == then.playlist) {
-      //must be a tag change
-      //set to the "all" playlist, this will trigger a second $watch
+  var getTags = function(o) {
+    o = o || $scope.filter.tags;
+    return Object.keys(o).filter(function(t) { return o[t] });
+  };
+
+  $scope.$watch("filter.tags", function(now, then) {
+    var len = getTags(now).length;
+    if (len && len != getTags(then).length) {
       $scope.filter.playlist = "all";
     }
-    var photos = playlists[now.playlist];
-    var filtered = streamFilter(photos, now.tags);
-    setPhotos(filtered);
+    getPhotos();
   }, true);
 
+  $scope.$watch("filter.playlist", function(now, then) {
+    if (now !== then && now !== "all") {
+      $scope.filter.tags = {};
+    }
+    getPhotos();
+  });
 
   $scope.clearHero = function() {
     $scope.ui.hero = null;

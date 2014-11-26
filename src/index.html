@@ -20,51 +20,58 @@
 
     <div ng-controller="PhotoController">
 
-      <div class="container" ng-class="{ 'show-filter': showFilter, 'show-gallery': uiState.hero }">
+      <div class="container clear-fix" ng-class="{ 'show-filter': showFilter, 'show-gallery': ui.hero }">
         <div class="filter">
           <div class="inner">
-            <p><strong>Editor's Picks:</strong><br>
-              <input type="checkbox" id="default" ng-model="tags.default"><label for="default">Default</label><br>
-              <input type="checkbox" id="special" ng-model="tags.special"><label for="special">Special</label></p>
+            <h2><i class="fa fa-thumbs-o-up"></i> Editor's Picks</h2>
+              <input type="radio" name="playlist" id="default" ng-model="filter.playlist" value="default">
+              <label for="default">Default</label>
 
-            <p><strong>Topics:</strong><br>
-              <input type="checkbox" id="kittens" ng-model="tags.kittens"><label for="kittens">Kittens</label><br>
-              <input type="checkbox" id="seahawks" ng-model="tags.seahawks"><label for="seahawks">Seahawks</label></p>
+              <input type="radio" name="playlist" id="special" ng-model="filter.playlist" value="special">
+              <label for="special">Special</label>
 
-            <p><strong>Photographers:</strong><br>
-              <input type="checkbox" id="diane" ng-model="tags.diane"><label for="diane">Diane Arbus</label><br>
-              <input type="checkbox" id="ansel" ng-model="tags.ansel"><label for="ansel">Ansel Adams</label></p>
+            <h2><i class="fa fa-tags"></i> Topics</h2>
+              <input type="checkbox" id="kittens" ng-model="filter.tags.kittens">
+              <label for="kittens">Kittens</label>
+              <input type="checkbox" id="seahawks" ng-model="filter.tags.seahawks">
+              <label for="seahawks">Seahawks</label>
+
+            <h2><i class="fa fa-camera"></i> Photographers</h2>
+              <input type="checkbox" id="diane" ng-model="filter.tags.diane">
+              <label for="diane">Diane Arbus</label>
+              <input type="checkbox" id="ansel" ng-model="filter.tags.ansel">
+              <label for="ansel">Ansel Adams</label>
             </div>
         </div>
 
         <div class="gallery" >
           <div class="close" ng-click="clearHero()"><i class="fa fa-times-circle"></i></div>
 
-          <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="uiState.heroIndex > 0"></i>
+          <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
 
-          <div class="content" ng-class="{portrait: uiState.hero.orientation == 'portrait'}">
+          <div class="content" ng-class="{portrait: ui.hero.orientation == 'portrait'}">
             <div class="hero">
-              <img ng-src="/assets/{{uiState.hero.image}}">
+              <img ng-src="/assets/{{ui.hero.image}}">
             </div>
 
             <div class="info">
-              <div class="photo-title"><strong>{{uiState.hero.title}}</strong> <em>({{uiState.hero.date}})</em></div>
-              <div class="description">{{uiState.hero.description}}</div>
+              <div class="photo-title"><strong>{{ui.hero.title}}</strong> <em>({{ui.hero.date}})</em></div>
+              <div class="description">{{ui.hero.description}}</div>
             </div>
           </div>
           
           <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1
-          )" ng-show="uiState.heroIndex < photos.length - 1"></i>
+          )" ng-show="ui.heroIndex < photos.length - 1"></i>
         </div>
 
         <div class="filmstrip">
           <div class="filter-button" ng-click="showFilter = !showFilter">
-            <i class="fa fa-tags"></i> Viewing: {{ filterTitle() }}
+            <i class="fa fa-chevron-left"></i> Viewing: {{ filterTitle() }}
           </div>
 
           <div class="images">
             <img
-              ng-class="{ current: photo == uiState.hero }" 
+              ng-class="{ current: photo == ui.hero }" 
               ng-repeat="photo in photos"
               ng-src="/assets/{{photo.image}}"
               ng-click="setHero(photo)">

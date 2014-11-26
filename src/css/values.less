@@ -6,3 +6,13 @@
 @hed: Georgia;
 
 @charcoal: #333;
+
+.clear-fix {
+  &::after {
+    content: " ";
+    height: 0;
+    width: 0;
+    display: block;
+    clear: both;
+  }
+}

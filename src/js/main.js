@@ -1,29 +1,32 @@
 //Use CommonJS style via browserify to load other modules
 
 var app = require("./application");
-require("./filters");
+var streamFilter = require("./filters");
 
 var isMobile = require("./isMobile");
 
-app.controller("PhotoController", ["$scope", "$filter", function($scope, $filter) {
+app.controller("PhotoController", ["$scope", function($scope) {
+  
   var all = window.photoData;
   $scope.photos = [];
 
-  $scope.uiState = {};
-  $scope.tags = {
-    default: true
+  $scope.ui = {
+    showFilter: false,
+    hero: null,
+    heroIndex: 0
   };
-  $scope.showFilter = false;
+  $scope.filter = {
+    playlist: "default",
+    tags: {}
+  };
 
   var setHero = $scope.setHero = function(photo) {
-    $scope.uiState.hero = photo;
-    $scope.uiState.heroIndex = $scope.photos.indexOf(photo);
-    $scope.gotoAnchor(photo.id);
+    $scope.ui.hero = photo;
+    $scope.ui.heroIndex = $scope.photos.indexOf(photo);
   };
 
   $scope.$watch("tags", function() {
-    var tagFilter = $filter("tagFilter");
-    var filteredPhotos = tagFilter(all, $scope.tags);
+    var filteredPhotos = streamFilter(all, $scope.filter);
     $scope.photos = filteredPhotos;
     if (!isMobile()) {
       setHero($scope.photos[0]);
@@ -31,22 +34,20 @@ app.controller("PhotoController", ["$scope", "$filter", function($scope, $filter
   }, true);
 
   $scope.clearHero = function() {
-    $scope.uiState.hero = null;
+    $scope.ui.hero = null;
   };
 
   $scope.changeHero = function(delta) {
     delta = delta || 1;
-    var index = $scope.photos.indexOf($scope.uiState.hero);
+    var index = $scope.photos.indexOf($scope.ui.hero);
     index += delta;
     var nextPhoto = $scope.photos[index];
     setHero(nextPhoto);
   };
 
+  var playlists = ["default", "special"];
   $scope.filterTitle = function() {
-    if ($scope.tags.keys) {
-      return "Editor's Choice"
-    } else {
-      return "Custom Filter"
-    }
+    var keys = Object.keys($scope.filter.tags).filter(function(key) { return $scope.filter.tags[key] });
+    return [$scope.filter.playlist].concat(keys).join(", ");
   };
 }]);

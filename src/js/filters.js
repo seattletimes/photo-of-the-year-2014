@@ -1,14 +1,10 @@
 //the stream filter takes an array and a filter object, and returns matching items
-module.exports = function(photos, filter) {
-  //merge playlist with tags
-  var tags = filter.playlist ? [filter.playlist] : [];
-  tags.push.apply(tags, Object.keys(filter.tags).filter(function(t) { return filter.tags[t] }));
-  //filter the array, returning only cats that match
+module.exports = function(photos, tagHash) {
+  var tags = Object.keys(tagHash).filter(function(t) { return tagHash[t] });
+  if (!tags.length) return photos;
   var filtered = photos.filter(function(photo) {
-    //for each photo, require all tags to exist
-    return tags.every(function(tag) {
-      //check for tag in the photo tags
-      return photo.tags.indexOf(tag) > -1;
+    return tags.every(function(t) {
+      return photo.tags.indexOf(t) > -1;
     });
   });
   return filtered;

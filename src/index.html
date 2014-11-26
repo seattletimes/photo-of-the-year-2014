@@ -40,7 +40,7 @@
         <div class="gallery" >
           <div class="close" ng-click="clearHero()"><i class="fa fa-times-circle"></i></div>
 
-          <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)"></i>
+          <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="uiState.heroIndex > 0"></i>
 
           <div class="content" ng-class="{portrait: uiState.hero.orientation == 'portrait'}">
             <div class="hero">
@@ -54,7 +54,7 @@
           </div>
           
           <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1
-          )"></i>
+          )" ng-show="uiState.heroIndex < photos.length - 1"></i>
         </div>
 
         <div class="filmstrip">

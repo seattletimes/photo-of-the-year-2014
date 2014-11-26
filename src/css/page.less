@@ -1,0 +1,41 @@
+body {
+  font-family: @sans;
+  font-size: 14px;
+}
+
+.nav-bar {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 44px;
+  padding: 10px;
+  margin: -10px -10px 0px -10px;
+
+  .logo { 
+    height: 100%;  
+  }
+}
+
+.title {
+  font-weight: bold;
+  font-size: 40px;
+  font-family: @hed;
+  text-align: center;
+
+  @media @mobile {
+    font-size: 24px;
+  }
+}
+
+.ad {
+  width: 100%;
+  margin: auto;
+  background-color: #DDD;
+  width: 750px;
+  height: 100px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  @media @mobile {
+    width: 375px;
+    height: 50px;
+  }
+}

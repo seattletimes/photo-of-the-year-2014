@@ -29,7 +29,7 @@
     font-size: 12px;
     position: absolute;
     background: @charcoal;
-    z-index: 999;
+    z-index: 998;
     transform-origin: bottom;
     top: 0;
     right: 200px;
@@ -46,6 +46,19 @@
 
     .inner {
       padding: 20px;
+
+      .close {
+        position: absolute;
+        font-size: 15px;
+        right: 5px;
+        top: 15px;
+        cursor: pointer;
+        padding: 0px 10px;
+
+        &:hover {
+          color: @yellow;
+        }
+      }
     }
 
     h2 {
@@ -92,28 +105,38 @@
       }
     }
 
-    .filter-button {
-      cursor: pointer;
-      position: absolute;
-      background: #FF8600;
-      color: white;
-      padding: 5px 8px;
-      font-size: 13px;
-      width: 100%;
+    .filter-info {
+      padding: 12px 10px 15px 10px;
+      font-size: 12px;
 
-      &:hover {
-        background: #FFC90D;
+      .filter-button {
+        cursor: pointer;
+        background: @orange;
+        color: white;
+        padding: 5px 8px;
+        margin: auto;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 13px;
+
+        &:hover {
+          background: @yellow;
+        }
       }
     }
 
     .images { 
       height: 772px;
       overflow-y: scroll;
-      margin-top: 28px;
 
       @media @mobile {
         height: 100%;
         overflow-y: auto;
+      }
+
+      .no-photos {
+        font-style: italic;
+        padding: 10px 20px;
       }
     }
 
@@ -153,12 +176,11 @@
         opacity: 1;
       }
     }
-
   }
 
   .gallery {
     width: calc(~"100% - 200px");
-    padding: 20px 65px;
+    padding: 30px 65px;
     position: relative;
     float: left;
 
@@ -173,7 +195,7 @@
       padding: 50px 15px 62px 15px;
 
       .inner {
-        overflow: scroll;
+        overflow-y: scroll;
         height: 100%;
       }
 
@@ -196,8 +218,10 @@
       position: absolute;
       right: 12px;
       top: 10px;
-      font-size: 25px;
+      font-size: 20px;
+      color: #888;
       cursor: pointer;
+      padding: 0px 10px;
 
       @media @mobile {
         display: block;
@@ -208,9 +232,15 @@
       .hero {
         text-align: center;
 
+        .credit {
+          text-align: right;
+          font-size: 12px;
+          color: #DDD;
+          letter-spacing: 1px;
+        }
+
         img {
           max-width: 100%;
-          max-height: 600px;
         }
       }
 
@@ -252,6 +282,7 @@
       position: absolute;
       top: 395px;
       cursor: pointer;
+      color: #888;
 
       @media @mobile {
         top: auto;
@@ -260,7 +291,7 @@
       }
 
       &:hover {
-        color: #FFC90D;
+        color: @yellow;
       }
 
       &.previous {

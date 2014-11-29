@@ -1,31 +1,27 @@
 body {
   font-family: @sans;
   font-size: 14px;
-  margin: 0px;
-
-  .margin {
-    margin: 10px;
-  }
+  background-color: @charcoal;
+  color: white;
 }
 
-.nav-bar {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  height: 44px;
-  padding: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  z-index: 999;
+.top-bar {
+  border-bottom: 1px solid #AAA;
 
-  @media @mobile {
+  .logo {
+    width: 100%;
     position: relative;
-    z-index: -1;
-  }
+    top: 30px;
+    text-align: center;
+    display: block;
 
-  .logo { 
-    height: 100%;  
+    img {
+      box-sizing: content-box;
+      height: 30px;
+      background: white;
+      padding: 10px;
+      border: none;
+    }
   }
 }
 
@@ -34,20 +30,10 @@ body {
   font-size: 40px;
   font-family: @hed;
   text-align: center;
+  margin-top: 24px;
 
   @media @mobile {
     font-size: 24px;
-  }
-}
-
-.intro{
-  font-family: @sans;
-  max-width: 1000px;
-  margin: auto;
-  font-size: 18px;
-
-  @media @mobile {
-    font-size: 16px;
   }
 }
 
@@ -56,19 +42,8 @@ body {
   background-color: #DDD;
   width: 750px;
   height: 100px;
-  margin-top: 30px;
-  margin-bottom: 20px;
 
   @media @mobile {
-    width: 100%;
-    height: 50px;
-  }
-
-  &.top {
-    margin-top: 74px;
-
-    @media @mobile {
-      margin-top: 14px;
-    }
+    display: none;
   }
 }

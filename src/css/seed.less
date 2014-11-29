@@ -14,7 +14,6 @@
   margin-top: 20px;
   background-color: @charcoal;
   color: white;
-  max-width: 1200px;
   position: relative;
 
   @media @mobile {
@@ -97,7 +96,6 @@
 
     @media @mobile {
       width: 100%;
-      height: 100%;
       overflow: initial;
 
       .show-gallery& {
@@ -138,42 +136,41 @@
         font-style: italic;
         padding: 10px 20px;
       }
-    }
 
-    .image {
-      cursor: pointer;
-      height: 150px;
-      opacity: .4;
-      background-position: center;
-      background-size: 140%;
+      img {
+        cursor: pointer;
+        width: 100%;
+        opacity: .4;
+        background-position: center;
+        background-size: 140%;
 
-      @media @mobile { 
-        opacity: 1;
-        width: 50%;
-        display: inline-block;
-      }
-      // max-height: 500px;
+        @media @mobile { 
+          opacity: 1;
+          width: 75%;
+        }
+        // max-height: 500px;
 
-      // &.ng-enter {
-      //   transition: max-height 1s linear;
-      //   max-height: 0px;
+        // &.ng-enter {
+        //   transition: max-height 1s linear;
+        //   max-height: 0px;
 
-      //   &.ng-enter-active {
-      //     max-height: 400px;
-      //   }
-      // }
+        //   &.ng-enter-active {
+        //     max-height: 400px;
+        //   }
+        // }
 
-      // &.ng-leave {
-      //   transition: max-height 1s linear;
-      //   max-height: 500px;
+        // &.ng-leave {
+        //   transition: max-height 1s linear;
+        //   max-height: 500px;
 
-      //   &.ng-leave-active {
-      //     max-height: 0px;
-      //   }
-      // }
+        //   &.ng-leave-active {
+        //     max-height: 0px;
+        //   }
+        // }
 
-      &.current {
-        opacity: 1;
+        &.current {
+          opacity: 1;
+        }
       }
     }
   }

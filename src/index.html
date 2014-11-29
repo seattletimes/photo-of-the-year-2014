@@ -11,95 +11,89 @@
   </head>
 
   <body ng-app="photo-test">
-    <div class="nav-bar">
-      <img class="logo" src="http://seattletimes.com/art/ui/seattletimeslogo_home.svg">
-    </div>
 
-    <div class="margin">
-      <div class="ad top"></div>
+    <div class="ad"></div>
 
-      <div class="title">2014 Pictures of the Year</div>
+    <nav class="top-bar">
+      <a class="logo" href="http://seattletimes.com">
+        <img src="http://seattletimes.com/art/ui/seattletimeslogo_home.svg">
+      </a>
+    </nav>
 
-      <div class="intro">
-        <p>Vinyl mumblecore pickled, 8-bit craft beer Etsy four loko Truffaut organic Helvetica Intelligentsia. Carles put a bird on it raw denim, migas hoodie distillery keytar. Pork belly occupy shabby chic McSweeney's XOXO, whatever DIY four dollar toast retro High Life bitters sriracha blog gastropub.</p>
+    <div class="title">2014 Pictures of the Year</div>
 
-        <p>Cold-pressed viral tote bag, raw denim actually craft beer distillery listicle gastropub fashion axe banh mi. Fap cornhole church-key plaid Truffaut typewriter. Tilde squid Pinterest, butcher disrupt Brooklyn organic taxidermy cray artisan. Kitsch skateboard tofu Echo Park roof party, typewriter chillwave.</p>
-      </div>
+    <div ng-controller="PhotoController">
 
-      <div ng-controller="PhotoController">
+      <div class="container clear-fix" ng-class="{ 'show-filter': showFilter, 'show-gallery': ui.hero }">
+        <div class="filter">
+          <div class="inner">
+            <div class="close" ng-click="showFilter = false">&#10005;</div>
+            <h2><i class="fa fa-thumbs-o-up"></i> Editor's Picks</h2>
+              <input type="radio" name="playlist" id="default" ng-model="filter.playlist" value="default">
+              <label for="default">Default</label>
 
-        <div class="container clear-fix" ng-class="{ 'show-filter': showFilter, 'show-gallery': ui.hero }">
-          <div class="filter">
-            <div class="inner">
-              <div class="close" ng-click="showFilter = false">&#10005;</div>
-              <h2><i class="fa fa-thumbs-o-up"></i> Editor's Picks</h2>
-                <input type="radio" name="playlist" id="default" ng-model="filter.playlist" value="default">
-                <label for="default">Default</label>
+              <input type="radio" name="playlist" id="special" ng-model="filter.playlist" value="special">
+              <label for="special">Special</label>
 
-                <input type="radio" name="playlist" id="special" ng-model="filter.playlist" value="special">
-                <label for="special">Special</label>
+              <input type="radio" name="playlist" id="all" ng-model="filter.playlist" value="all">
+             <label for="all">All</label>
 
-                <input type="radio" name="playlist" id="all" ng-model="filter.playlist" value="all">
-               <label for="all">All</label>
+            <h2><i class="fa fa-tags"></i> Topics</h2>
+              <input type="checkbox" id="kittens" ng-model="filter.tags.kittens">
+              <label for="kittens">Kittens</label>
+              <input type="checkbox" id="seahawks" ng-model="filter.tags.seahawks">
+              <label for="seahawks">Seahawks</label>
 
-              <h2><i class="fa fa-tags"></i> Topics</h2>
-                <input type="checkbox" id="kittens" ng-model="filter.tags.kittens">
-                <label for="kittens">Kittens</label>
-                <input type="checkbox" id="seahawks" ng-model="filter.tags.seahawks">
-                <label for="seahawks">Seahawks</label>
-
-              <h2><i class="fa fa-camera"></i> Photographers</h2>
-                <input type="checkbox" id="diane" ng-model="filter.tags.diane">
-                <label for="diane">Diane Arbus</label>
-                <input type="checkbox" id="ansel" ng-model="filter.tags.ansel">
-                <label for="ansel">Ansel Adams</label>
-              </div>
-          </div>
-
-          <div class="gallery">
-            <div class="inner">
-              <div class="close" ng-click="clearHero()">&#10005;</div>
-
-              <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
-
-              <div class="content" ng-class="{portrait: ui.hero.orientation == 'portrait'}">
-                <div class="hero">
-                  <img ng-src="/assets/{{ui.hero.image}}">
-                  <div class="credit">{{ui.hero.credit}}</div>
-                </div>
-
-                <div class="info">
-                  <div class="photo-title"><strong>{{ui.hero.title}}</strong> <em>({{ui.hero.date}})</em></div>
-                  <div class="description">{{ui.hero.description}}</div>
-                </div>
-              </div>
-              
-              <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
+            <h2><i class="fa fa-camera"></i> Photographers</h2>
+              <input type="checkbox" id="diane" ng-model="filter.tags.diane">
+              <label for="diane">Diane Arbus</label>
+              <input type="checkbox" id="ansel" ng-model="filter.tags.ansel">
+              <label for="ansel">Ansel Adams</label>
             </div>
-          </div>
+        </div>
 
-          <div class="filmstrip">
-            <div class="filter-info">
-              <em>Viewing:</em> {{ filterTitle() }}
-              <div class="filter-button" ng-click="showFilter = !showFilter">
-                <i class="fa fa-chevron-left"></i> Change filter
+        <div class="gallery">
+          <div class="inner">
+            <div class="close" ng-click="clearHero()">&#10005;</div>
+
+            <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
+
+            <div class="content" ng-class="{portrait: ui.hero.orientation == 'portrait'}">
+              <div class="hero">
+                <img ng-src="/assets/{{ui.hero.image}}">
+                <div class="credit">{{ui.hero.credit}}</div>
+              </div>
+
+              <div class="info">
+                <div class="photo-title"><strong>{{ui.hero.title}}</strong> <em>({{ui.hero.date}})</em></div>
+                <div class="description">{{ui.hero.description}}</div>
               </div>
             </div>
-
-            <div class="images">
-              <div ng-show="photos.length == 0" class="no-photos">No photos match your search.</div>
-              <div
-                ng-repeat="photo in photos" 
-                ng-style="{'background-image': 'url(/assets/{{photo.image}})'}"
-                ng-click="setHero(photo)"
-                ng-class="{ current: photo == ui.hero, image: true }" >
-              </div>
+            
+            <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
           </div>
         </div>
-      </div>
 
-      <div class="ad"></div>
+        <div class="filmstrip">
+          <div class="filter-info">
+            <em>Viewing:</em> {{ filterTitle() }}
+            <div class="filter-button" ng-click="showFilter = !showFilter">
+              <i class="fa fa-chevron-left"></i> Change filter
+            </div>
+          </div>
+
+          <div class="images">
+            <div ng-show="photos.length == 0" class="no-photos">No photos match your search.</div>
+            <img
+              ng-class="{ current: photo == ui.hero, image: true }" 
+              ng-repeat="photo in photos"
+              ng-src="/assets/{{photo.image}}"
+              ng-click="setHero(photo)">
+        </div>
+      </div>
     </div>
+
+    <div class="ad"></div>
 
     <script>
       <% csv.photos.forEach(function(photo) { 

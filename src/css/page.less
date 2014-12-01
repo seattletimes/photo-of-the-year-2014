@@ -18,10 +18,24 @@ body {
     img {
       box-sizing: content-box;
       height: 30px;
-      background: white;
       padding: 10px;
-      border: none;
     }
+  }
+}
+
+.mobile-nav {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 44px;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #222;
+  z-index: 999;
+
+  .logo img {
+    height: 20px;
   }
 }
 
@@ -33,15 +47,19 @@ body {
   margin-top: 24px;
 
   @media @mobile {
-    font-size: 24px;
+    font-size: 26px;
+    margin-top: 58px;
   }
 }
 
 .ad {
   margin: auto;
+  margin-top: 20px;
   background-color: #DDD;
   width: 750px;
   height: 100px;
+  text-align: center;
+  color: black;
 
   @media @mobile {
     display: none;

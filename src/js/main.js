@@ -3,9 +3,9 @@
 var app = require("./application");
 var streamFilter = require("./filters");
 
-var isMobile = require("./isMobile");
-
 app.controller("PhotoController", ["$scope", function($scope) {
+
+  var isMobile = $scope.isMobile = require("./isMobile");
 
   var all = window.photoData;
   var playlists = {

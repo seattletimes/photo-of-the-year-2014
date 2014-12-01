@@ -12,17 +12,21 @@
 
   <body ng-app="photo-test">
 
-    <div class="ad"></div>
-
-    <nav class="top-bar">
-      <a class="logo" href="http://seattletimes.com">
-        <img src="http://seattletimes.com/art/ui/seattletimeslogo_home.svg">
-      </a>
-    </nav>
-
-    <div class="title">2014 Pictures of the Year</div>
+    <div class="ad">ADVERTISEMENT</div>
 
     <div ng-controller="PhotoController">
+
+      <nav class="top-bar" ng-show="!isMobile()">
+        <a class="logo" href="http://seattletimes.com">
+          <img src="/assets/logo-transparent.png">
+        </a>
+      </nav>
+
+      <div class="title">2014 Pictures of the Year</div>
+
+      <div class="mobile-nav" ng-show="isMobile()">
+        <%= t.include("partials/_filterInfo.html") %>
+      </div>
 
       <div class="container clear-fix" ng-class="{ 'show-filter': showFilter, 'show-gallery': ui.hero }">
         <div class="filter">
@@ -60,8 +64,10 @@
 
             <div class="content" ng-class="{portrait: ui.hero.orientation == 'portrait'}">
               <div class="hero">
-                <img ng-src="/assets/{{ui.hero.image}}">
-                <div class="credit">{{ui.hero.credit}}</div>
+                <div class="inner-hero">
+                  <img ng-src="/assets/{{ui.hero.image}}">
+                  <div class="credit">{{ui.hero.credit}}</div>
+                </div>
               </div>
 
               <div class="info">
@@ -75,12 +81,7 @@
         </div>
 
         <div class="filmstrip">
-          <div class="filter-info">
-            <em>Viewing:</em> {{ filterTitle() }}
-            <div class="filter-button" ng-click="showFilter = !showFilter">
-              <i class="fa fa-chevron-left"></i> Change filter
-            </div>
-          </div>
+          <div ng-show="!isMobile()"><%= t.include("partials/_filterInfo.html") %></div>
 
           <div class="images">
             <div ng-show="photos.length == 0" class="no-photos">No photos match your search.</div>
@@ -93,7 +94,7 @@
       </div>
     </div>
 
-    <div class="ad"></div>
+    <div class="ad">ADVERTISEMENT</div>
 
     <script>
       <% csv.photos.forEach(function(photo) { 

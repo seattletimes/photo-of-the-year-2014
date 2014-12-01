@@ -8,8 +8,43 @@
 @import "values";
 @import "page";
 
+.filter-info {
+  padding-bottom: 15px;
+  font-size: 12px;
+
+  @media @mobile {
+    padding-top: 6px;
+
+    .viewing {
+      display: none;
+    }
+  }
+
+  .filter-button {
+    cursor: pointer;
+    background: @blue;
+    color: white;
+    padding: 5px 8px;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 13px;
+
+    @media @mobile {
+      position: absolute;
+      top: 0px;
+      right: 10px;
+    }
+
+    &:hover {
+      background: @light;
+    }
+  }
+}
+
 .container {
   min-height: 800px;
+  width: 90%;
   margin: auto;
   margin-top: 20px;
   background-color: @charcoal;
@@ -19,6 +54,7 @@
   @media @mobile {
     width: 100%;
     height: auto;
+    margin-top: 16px;
   }
 
   .filter {
@@ -31,11 +67,17 @@
     z-index: 998;
     transform-origin: bottom;
     top: 0;
-    right: 200px;
+    right: 210px;
     transition: transform .3s ease-out, opacity .3s linear;
     // transform: translateY(-100%) translateX(-50%) perspective(1000px) rotateX(90deg);
     opacity: 0;
     box-shadow: 0 12px 16px rgba(0, 0, 0, .3);
+    background-color: #EEE;
+    color: #333;
+
+    @media @mobile {
+      right: 20%;
+    }
 
     .show-filter& {
       // transform: translateY(0) translateX(-50%) perspective(1000px) rotateX(0deg);
@@ -44,7 +86,7 @@
     }
 
     .inner {
-      padding: 20px;
+      padding: 10px 20px 20px 20px;
 
       .close {
         position: absolute;
@@ -55,7 +97,7 @@
         padding: 0px 10px;
 
         &:hover {
-          color: @yellow;
+          color: @light;
         }
       }
     }
@@ -103,29 +145,10 @@
       }
     }
 
-    .filter-info {
-      padding: 12px 10px 15px 10px;
-      font-size: 12px;
-
-      .filter-button {
-        cursor: pointer;
-        background: @orange;
-        color: white;
-        padding: 5px 8px;
-        margin: auto;
-        border-radius: 5px;
-        margin-top: 10px;
-        font-size: 13px;
-
-        &:hover {
-          background: @yellow;
-        }
-      }
-    }
-
     .images { 
       height: 772px;
       overflow-y: scroll;
+      text-align: center;
 
       @media @mobile {
         height: 100%;
@@ -189,7 +212,7 @@
       height: 100%;
       display: none;
       background: @charcoal;
-      padding: 50px 15px 62px 15px;
+      padding: 50px 15px 60px 15px;
 
       .inner {
         overflow-y: scroll;
@@ -213,8 +236,8 @@
     .close {
       display: none;
       position: absolute;
-      right: 12px;
-      top: 10px;
+      right: 16px;
+      top: 54px;
       font-size: 20px;
       color: #888;
       cursor: pointer;
@@ -229,15 +252,19 @@
       .hero {
         text-align: center;
 
-        .credit {
-          text-align: right;
-          font-size: 12px;
-          color: #DDD;
-          letter-spacing: 1px;
-        }
+        .inner-hero {
+          display: inline-block;
 
-        img {
-          max-width: 100%;
+          .credit {
+            text-align: right;
+            font-size: 12px;
+            color: #DDD;
+            letter-spacing: 1px;
+          }
+
+          img {
+            max-width: 100%;
+          }
         }
       }
 
@@ -255,9 +282,9 @@
           float: left;
           padding-right: 20px;
 
-          img {
-            max-height: 760px;
-          }
+          // img {
+          //   max-height: 760px;
+          // }
 
           @media @mobile {
             padding-right: 0;
@@ -288,7 +315,7 @@
       }
 
       &:hover {
-        color: @yellow;
+        color: @light;
       }
 
       &.previous {

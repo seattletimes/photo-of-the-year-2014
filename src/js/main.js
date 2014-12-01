@@ -76,16 +76,18 @@ app.controller("PhotoController", ["$scope", function($scope) {
     return [$scope.filter.playlist].concat(keys).join(", ");
   };
 
-  $scope.launchIntoFullscreen = function(element) {
-    debugger
-    if(element.requestFullscreen) {
+  $scope.launchIntoFullscreen = function(id) {
+    var element = document.getElementsByClassName(id)
+    if (element.requestFullscreen) {
       element.requestFullscreen();
-    } else if(element.mozRequestFullScreen) {
+    } else if (element.mozRequestFullScreen) {
       element.mozRequestFullScreen();
-    } else if(element.webkitRequestFullscreen) {
+    } else if (element.webkitRequestFullscreen) {
       element.webkitRequestFullscreen();
-    } else if(element.msRequestFullscreen) {
+    } else if (element.msRequestFullscreen) {
       element.msRequestFullscreen();
+    } else {
+      console.log("fullscreen isn't working");
     }
   };
 

@@ -76,19 +76,18 @@ app.controller("PhotoController", ["$scope", function($scope) {
     return [$scope.filter.playlist].concat(keys).join(", ");
   };
 
-  $scope.launchIntoFullscreen = function(id) {
-    var element = document.getElementsByClassName(id)
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen();
-    } else {
-      console.log("fullscreen isn't working");
+  var requestFull = "requestFullscreen";
+  if (!document.body[requestFull]) ["webkit", "moz", "ms"].forEach(function(prefix) {
+    var r = prefix + "RequestFullscreen";
+    if (document.body[r]) {
+      requestFull = r;
     }
+  });
+
+  $scope.launchIntoFullscreen = function(id) {
+    var element = document.querySelector(id);
+    if (!element[requestFull]) return;
+    element[requestFull]();
   };
 
 }]);

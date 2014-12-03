@@ -44,7 +44,7 @@
 .container {
   min-height: 800px;
   max-width: 1200px;
-  padding-right: 10px;
+  padding: 30px 0;
   margin: auto;
   background-color: @charcoal;
   color: white;
@@ -54,6 +54,7 @@
     width: 100%;
     height: auto;
     margin-top: 16px;
+    padding-right: 0;
   }
 
   .filter {
@@ -63,15 +64,16 @@
     position: absolute;
     background: @charcoal;
     z-index: 998;
-    transform-origin: bottom;
+    // transform-origin: bottom;
     top: 26px;
-    right: 210px;
-    transition: transform .3s ease-out, opacity .3s linear;
+    right: 240px;
+    // transition: transform .3s ease-out, opacity .3s linear;
     // transform: translateY(-100%) translateX(-50%) perspective(1000px) rotateX(90deg);
-    opacity: 0;
+    // opacity: 0;
     box-shadow: 0 12px 16px rgba(0, 0, 0, .3);
     background-color: #EEE;
     color: #333;
+    display: none;
 
     @media @mobile {
       width: 100%;
@@ -81,7 +83,7 @@
 
     .show-filter& {
       // transform: translateY(0) translateX(-50%) perspective(1000px) rotateX(0deg);
-      opacity: 1;
+      display: block;
     }
 
     .inner {
@@ -210,7 +212,7 @@
 
   .gallery {
     width: calc(~"100% - 210px");
-    padding: 30px 65px;
+    padding: 0px 65px;
     position: relative;
     float: left;
 
@@ -246,11 +248,13 @@
     .close {
       display: none;
       position: absolute;
-      right: 16px;
-      top: 54px;
+      right: 15px;
+      top: 50px;
       font-size: 20px;
       cursor: pointer;
-      padding: 0px 10px;
+      padding: 0px 5px;
+      background-color: #EEE;
+      color: #333;
 
       @media @mobile {
         display: block;
@@ -275,6 +279,10 @@
             padding: 5px;
             font-size: 20px;
             cursor: pointer;
+
+            @media @mobile {
+              display: none;
+            }
           }
 
           .credit {
@@ -347,7 +355,7 @@
         left: 22px;
 
         @media @mobile {
-          left: 42%;
+          left: calc(~"50% - 30px");
         }
       }
 
@@ -355,7 +363,7 @@
         right: 22px;
 
         @media @mobile {
-          right: 42%;
+          right: calc(~"50% - 30px");
         }
       }
     }

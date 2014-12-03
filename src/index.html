@@ -4,7 +4,7 @@
     <title><%= json.project.title %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:700,300italic,400' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <%= t.include("partials/_adHead.html") %>
@@ -16,11 +16,11 @@
 
     <div ng-controller="PhotoController" ng-cloak>
 
-      <nav class="top-bar" ng-show="!isMobile()">
-        <a class="logo" href="http://seattletimes.com">
+      <div class="desktop-logo">
+        <a href="http://seattletimes.com" ng-show="!isMobile()">
           <img src="/assets/logo-gray.jpg">
         </a>
-      </nav>
+      </div>
 
       <div class="title">2014 Pictures of the Year</div>
 
@@ -32,7 +32,8 @@
         <div class="filter">
           <div class="inner">
             <div class="close" ng-click="showFilter = false">&#10005;</div>
-            <h2><i class="fa fa-thumbs-o-up"></i> Editor's Picks</h2>
+            <div class="filter-group">
+              <h2><i class="fa fa-thumbs-o-up"></i> Editor's Picks</h2>
               <input type="radio" name="playlist" id="default" ng-model="filter.playlist" value="default">
               <label for="default">Default</label>
 
@@ -40,20 +41,49 @@
               <label for="special">Special</label>
 
               <input type="radio" name="playlist" id="all" ng-model="filter.playlist" value="all">
-             <label for="all">All</label>
+              <label for="all">All</label>
+            </div>
 
-            <h2><i class="fa fa-tags"></i> Topics</h2>
-              <input type="checkbox" id="kittens" ng-model="filter.tags.kittens">
-              <label for="kittens">Kittens</label>
+            <div class="filter-group">
+              <h2><i class="fa fa-tags"></i> Topics</h2>
+              <input type="checkbox" id="selects" ng-model="filter.tags.selects">
+              <label for="selects">Selects</label>
+              <input type="checkbox" id="news" ng-model="filter.tags.news">
+              <label for="news">News</label>
+              <input type="checkbox" id="sports" ng-model="filter.tags.sports">
+              <label for="sports">Sports</label>
+              <input type="checkbox" id="nature" ng-model="filter.tags.nature">
+              <label for="nature">Nature</label>
+              <input type="checkbox" id="people" ng-model="filter.tags.people">
+              <label for="people">People</label>
+              <input type="checkbox" id="landmarks" ng-model="filter.tags.landmarks">
+              <label for="landmarks">Landmarks</label>
+            </div>
+              
+            <div class="filter-group">
+              <h2><i class="fa fa-futbol-o"></i> Sports</h2>
               <input type="checkbox" id="seahawks" ng-model="filter.tags.seahawks">
               <label for="seahawks">Seahawks</label>
+              <input type="checkbox" id="sounders" ng-model="filter.tags.sounders">
+              <label for="sounders">Sounders</label>
+              <input type="checkbox" id="uw" ng-model="filter.tags.uw">
+              <label for="uw">UW</label>
+              <input type="checkbox" id="prep" ng-model="filter.tags.prep">
+              <label for="prep">Prep</label>
+              <input type="checkbox" id="storm" ng-model="filter.tags.storm">
+              <label for="storm">Storm</label>
+              <input type="checkbox" id="reign" ng-model="filter.tags.reign">
+              <label for="reign">Reign</label>
+            </div>
 
-            <h2><i class="fa fa-camera"></i> Photographers</h2>
+            <div class="filter-group">
+              <h2><i class="fa fa-camera"></i> Photographers</h2>
               <input type="checkbox" id="diane" ng-model="filter.tags.diane">
               <label for="diane">Diane Arbus</label>
               <input type="checkbox" id="ansel" ng-model="filter.tags.ansel">
               <label for="ansel">Ansel Adams</label>
             </div>
+          </div>
         </div>
 
         <div class="gallery">
@@ -65,7 +95,10 @@
             <div class="content" ng-class="{portrait: ui.hero.orientation == 'portrait'}">
               <div class="hero">
                 <div class="inner-hero">
-                  <img id="hero" ng-click="launchIntoFullscreen('#hero')" ng-src="/assets/{{ui.hero.image}}">
+
+                  <i ng-click="launchIntoFullscreen('#hero')" class="expand fa fa-expand"></i>
+
+                  <img id="hero" ng-src="/assets/{{ui.hero.image}}">
                   <div class="credit">{{ui.hero.credit}}</div>
                 </div>
               </div>

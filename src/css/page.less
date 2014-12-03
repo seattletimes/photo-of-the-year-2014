@@ -1,3 +1,7 @@
+[ng-cloak] {
+  display: none;
+}
+
 body {
   font-family: @sans;
   font-size: 14px;
@@ -5,21 +9,17 @@ body {
   color: white;
 }
 
-.top-bar {
-  border-bottom: 1px solid #AAA;
+.desktop-logo {
+  width: 100%;
+  position: relative;
+  top: 15px;
+  text-align: center;
+  display: block;
 
-  .logo {
-    width: 100%;
-    position: relative;
-    top: 30px;
-    text-align: center;
-    display: block;
-
-    img {
-      box-sizing: content-box;
-      height: 30px;
-      padding: 10px;
-    }
+  img {
+    box-sizing: content-box;
+    height: 30px;
+    padding: 10px;
   }
 }
 
@@ -44,7 +44,7 @@ body {
   font-size: 40px;
   font-family: @hed;
   text-align: center;
-  margin-top: 24px;
+  margin-top: 4px;
 
   @media @mobile {
     font-size: 26px;

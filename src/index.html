@@ -18,7 +18,7 @@
 
       <div class="desktop-logo">
         <a href="http://seattletimes.com" ng-show="!isMobile()">
-          <img src="/assets/logo-gray.jpg">
+          <img src="./assets/logo-gray.jpg">
         </a>
       </div>
 
@@ -32,22 +32,11 @@
         <div class="filter">
           <div class="inner">
             <div class="close" ng-click="showFilter = false">&#10005;</div>
-            <div class="filter-group">
-              <h2><i class="fa fa-thumbs-o-up"></i> Editor's Picks</h2>
-              <input type="radio" name="playlist" id="default" ng-model="filter.playlist" value="default">
-              <label for="default">Default</label>
-
-              <input type="radio" name="playlist" id="special" ng-model="filter.playlist" value="special">
-              <label for="special">Special</label>
-
-              <input type="radio" name="playlist" id="all" ng-model="filter.playlist" value="all">
-              <label for="all">All</label>
-            </div>
 
             <div class="filter-group">
               <h2><i class="fa fa-tags"></i> Topics</h2>
               <input type="checkbox" id="selects" ng-model="filter.tags.selects">
-              <label for="selects">Selects</label>
+              <label for="selects">Editor's Picks</label>
               <input type="checkbox" id="news" ng-model="filter.tags.news">
               <label for="news">News</label>
               <input type="checkbox" id="sports" ng-model="filter.tags.sports">
@@ -55,25 +44,37 @@
               <input type="checkbox" id="nature" ng-model="filter.tags.nature">
               <label for="nature">Nature</label>
               <input type="checkbox" id="people" ng-model="filter.tags.people">
-              <label for="people">People</label>
+              <label for="people">Portraits</label>
               <input type="checkbox" id="landmarks" ng-model="filter.tags.landmarks">
-              <label for="landmarks">Landmarks</label>
+              <label for="landmarks">Cityscapes</label>
+            </div>
+
+            <div class="subgroup filter-group" ng-class="{'show-subgroup': filter.tags.news }">
+              <h2><i class="fa fa-newspaper-o"></i> News</h2>
+              <input type="checkbox" id="oso" ng-model="filter.tags.oso">
+              <label for="oso">Oso</label>
+              <input type="checkbox" id="marysville" ng-model="filter.tags.marysville">
+              <label for="marysville">Marysville</label>
+              <input type="checkbox" id="spu" ng-model="filter.tags.spu">
+              <label for="spu">SPU</label>
             </div>
               
-            <div class="filter-group">
+            <div class="subgroup filter-group" ng-class="{'show-subgroup': filter.tags.sports }">
               <h2><i class="fa fa-futbol-o"></i> Sports</h2>
               <input type="checkbox" id="seahawks" ng-model="filter.tags.seahawks">
               <label for="seahawks">Seahawks</label>
               <input type="checkbox" id="sounders" ng-model="filter.tags.sounders">
               <label for="sounders">Sounders</label>
+              <input type="checkbox" id="mariners" ng-model="filter.tags.mariners">
+              <label for="mariners">Mariners</label>
               <input type="checkbox" id="uw" ng-model="filter.tags.uw">
-              <label for="uw">UW</label>
-              <input type="checkbox" id="prep" ng-model="filter.tags.prep">
-              <label for="prep">Prep</label>
+              <label for="uw">Huskies</label>
               <input type="checkbox" id="storm" ng-model="filter.tags.storm">
               <label for="storm">Storm</label>
               <input type="checkbox" id="reign" ng-model="filter.tags.reign">
               <label for="reign">Reign</label>
+              <input type="checkbox" id="prep" ng-model="filter.tags.prep">
+              <label for="prep">High School</label>
             </div>
 
             <div class="filter-group">
@@ -97,7 +98,7 @@
 
                   <i ng-click="launchIntoFullscreen('#fullscreen')" class="expand fa fa-expand"></i>
 
-                  <img ng-src="/assets/{{ui.hero.image}}">
+                  <img ng-src="./assets/{{ui.hero.image}}">
                   <div class="credit">{{ui.hero.credit}}</div>
                   
                   <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
@@ -122,7 +123,7 @@
             <img
               ng-class="{ current: photo == ui.hero, image: true }" 
               ng-repeat="photo in photos"
-              ng-src="/assets/{{photo.image}}"
+              ng-src="./assets/{{photo.image}}"
               ng-click="setHero(photo)">
         </div>
       </div>

@@ -39,7 +39,13 @@ module.exports = function(grunt) {
       photographers[credit] = true;
     });
     parser.on("finish", function() {
-      grunt.data.photos = parsed;
+      grunt.data.photos = parsed.sort(function(a,b) {
+        if (a.image < b.image) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
       grunt.data.photographers = Object.keys(photographers).sort(function(a, b) {
         var lastA = a.split(" ").pop();
         var lastB = b.split(" ").pop();

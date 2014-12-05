@@ -17,11 +17,12 @@ module.exports = function(grunt) {
 
     parser.on("data", function(line) {
       var photo = {
-        image:   line[0],
-        thumb:   line[0].replace(".JPG", "_185.jpg"),
-        tags:    line[1],
-        caption: line[2],
-        credit:  line[3]
+        image:    line[0],
+        thumb:    line[0].replace(".JPG", "_185.jpg"),
+        tags:     line[1],
+        caption:  line[2],
+        credit:   line[3],
+        portrait: (line[5]/line[6]) < 1
       }
       parsed.push(photo);
 

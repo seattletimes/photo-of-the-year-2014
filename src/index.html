@@ -53,6 +53,8 @@
               <h2><i class="fa fa-newspaper-o"></i> News</h2>
               <input type="checkbox" id="oso" ng-model="filter.tags.oso">
               <label for="oso">Oso</label>
+              <input type="checkbox" id="wildfire" ng-model="filter.tags.wildfire">
+              <label for="wildfire">Wildfire</label>
               <input type="checkbox" id="marysville" ng-model="filter.tags.marysville">
               <label for="marysville">Marysville</label>
               <input type="checkbox" id="spu" ng-model="filter.tags.spu">
@@ -79,10 +81,12 @@
 
             <div class="filter-group">
               <h2><i class="fa fa-camera"></i> Photographers</h2>
-              <input type="checkbox" id="diane" ng-model="filter.tags.diane">
-              <label for="diane">Diane Arbus</label>
-              <input type="checkbox" id="ansel" ng-model="filter.tags.ansel">
-              <label for="ansel">Ansel Adams</label>
+              <% photographers.forEach(function(photographer) { var tag = photographer.split(" ").pop(); %>
+              <div>
+                <input type="checkbox" id="<%= tag %>" ng-model="filter.tags.<%= tag %>">
+                <label for="<%= tag %>"><%= photographer %></label>
+              </div>
+              <% }) %>
             </div>
           </div>
         </div>
@@ -92,26 +96,25 @@
             <div class="close" ng-click="clearHero()">&#10005;</div>
 
             <div class="content" ng-class="{portrait: ui.hero.orientation == 'portrait'}">
-              <div class="hero">
-                <div id="fullscreen" class="inner-hero">
-                  <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
+              <div id="fullscreen" class="hero">
+                 <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
 
-                  <i ng-click="launchIntoFullscreen('#fullscreen')" class="expand fa fa-expand"></i>
+                <div class="inner-hero">
+                  <i ng-click="launchIntoFullscreen('#fullscreen')" class="zoom-in fa fa-expand"></i>
+                  <i ng-click="exitFullscreen()" class="zoom-out fa fa-compress"></i>
 
                   <img ng-src="./assets/{{ui.hero.image}}">
-                  <div class="credit">{{ui.hero.credit}}</div>
-                  
-                  <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
+                  <div class="credit">{{ui.hero.credit.toUpperCase()}} / THE SEATTLE TIMES</div>
                 </div>
+
+                <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
               </div>
 
               <div class="info">
-                <div class="photo-title"><strong>{{ui.hero.title}}</strong> <em>({{ui.hero.date}})</em></div>
-                <div class="description">{{ui.hero.description}}</div>
+                <div class="description">{{ui.hero.caption}}</div>
               </div>
             </div>
             
-
           </div>
         </div>
 
@@ -123,7 +126,7 @@
             <img
               ng-class="{ current: photo == ui.hero, image: true }" 
               ng-repeat="photo in photos"
-              ng-src="./assets/{{photo.image}}"
+              ng-src="./assets/{{photo.thumb}}"
               ng-click="setHero(photo)">
         </div>
       </div>
@@ -134,15 +137,7 @@
     <div class="ad">ADVERTISEMENT</div>
 
     <script>
-      <% csv.photos.forEach(function(photo) { 
-        photo.tags = photo.tags.split( "," );
-        if (!photo.curated) {
-          photo.curated = [];
-        } else {
-          photo.curated = photo.curated.split(",");
-        }
-      }); %>
-      var photoData = <%= JSON.stringify( csv.photos ) %>;
+      var photoData = <%= JSON.stringify( photos ) %>;
     </script>
 
     <script src="app.js"></script>

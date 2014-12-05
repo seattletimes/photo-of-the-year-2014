@@ -60,7 +60,6 @@
 .container {
   min-height: 800px;
   max-width: 1200px;
-  padding: 30px 0;
   margin: auto;
   background-color: @charcoal;
   color: white;
@@ -235,7 +234,7 @@
 
   .gallery {
     width: calc(~"100% - 210px");
-    padding: 0px 65px;
+    padding: 30px 65px 0px 65px;
     position: relative;
     float: left;
 
@@ -289,20 +288,23 @@
         text-align: center;
         
         img {
-          max-height: 600px;
+          max-height: 711px;
           max-width: 100%;
         }
 
         .inner-hero {
           display: inline-block;
+          max-width: 100%;
+          position: relative;
 
-          .expand {
+          .zoom-in, .zoom-out{
             color: #333;
             background-color: #EEE;
             position: absolute;
             padding: 5px;
             font-size: 20px;
             cursor: pointer;
+            right: 0;
 
             @media @mobile {
               display: none;
@@ -313,6 +315,10 @@
             }
           }
 
+          .zoom-out {
+            display: none;
+          }
+
           .credit {
             text-align: right;
             font-size: 12px;
@@ -320,15 +326,44 @@
             letter-spacing: 1px;
           }
         }
+
+        .fullscreen() {
+          // display: block;
+          background-color: black;
+
+          // .inner-hero {
+          //   height: 100%;
+          //   padding: 20px 72px 0 72px;
+          //   width: 100%;
+          // }
+
+
+          // img {
+          //   max-height: calc(~"100% - 30px");
+          //   max-width: 100%;
+          // }
+
+          // .arrow {
+          //   top: 50%;
+          // }
+
+          // .zoom-in {
+          //   display: none;
+          // }
+
+          // .zoom-out {
+          //   display: block;
+          // }
+        }
+
+        &:-webkit-full-screen { .fullscreen() }
+        &:-moz-full-screen    { .fullscreen() }
+        &:-ms-fullscreen      { .fullscreen() }
+        &:full-screen         { .fullscreen() }
       }
 
-      .info {
+      .description {
         padding-top: 15px;
-
-        .photo-title {
-          font-size: 16px;
-          padding-bottom: 10px;
-        }
       }
 
       // Only show portrait view on large screens
@@ -391,24 +426,5 @@
         }
       }
     }
-  }
-}
-
-#fullscreen:-webkit-full-screen {
-  background-color: black;
-  height: 100%;
-  padding: 20px 72px 0 72px;
-
-  img {
-    max-height: calc(~"100% - 30px");
-    max-width: 100%;
-  }
-
-  .arrow {
-    top: 50%;
-  }
-
-  .expand {
-    display: none;
   }
 }

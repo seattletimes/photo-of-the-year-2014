@@ -11,12 +11,6 @@ app.controller("PhotoController", ["$scope", function($scope) {
   var playlists = {
     all: all
   };
-  all.forEach(function(photo) {
-    photo.curated.forEach(function(list) {
-      if (!playlists[list]) playlists[list] = [];
-      playlists[list].push(photo);
-    });
-  });
 
   $scope.ui = {
     showFilter: false,
@@ -76,18 +70,28 @@ app.controller("PhotoController", ["$scope", function($scope) {
     return [$scope.filter.playlist].concat(keys).join(", ");
   };
 
-  var requestFull = "requestFullscreen";
-  if (!document.body[requestFull]) ["webkit", "moz", "ms"].forEach(function(prefix) {
-    var r = prefix + "RequestFullscreen";
-    if (document.body[r]) {
-      requestFull = r;
-    }
-  });
+  var elementProto = HTMLElement.prototype;
+  elementProto.requestFullscreen = elementProto.requestFullscreen || elementProto.webkitRequestFullscreen || elementProto.mozRequestFullScreen || elementProto.msRequestFullscreen;
+  document.exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullscreen || document.msExitFullscreen;
 
   $scope.launchIntoFullscreen = function(id) {
     var element = document.querySelector(id);
-    if (!element[requestFull]) return;
-    element[requestFull]();
+    element.requestFullscreen();
   };
 
+  $scope.exitFullscreen = function() {
+    document.exitFullscreen();
+  };
+
+  window.addEventListener("keydown", function(e) {
+    var keyDeltas = {
+      37: -1,
+      39: 1
+    };
+    if (e.keyCode in keyDeltas) {
+      $scope.changeHero(keyDeltas[e.keyCode]);
+      e.preventDefault();
+      $scope.$apply();
+    }
+  });
 }]);

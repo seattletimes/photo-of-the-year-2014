@@ -82,15 +82,17 @@ app.controller("PhotoController", ["$scope", function($scope) {
   };
 
   window.addEventListener("keydown", function(e) {
-    var keyDeltas = {
-      37: -1,
-      39: 1
-    };
-    if (e.keyCode in keyDeltas) {
-      $scope.changeHero(keyDeltas[e.keyCode]);
-      e.preventDefault();
-      $scope.$apply();
+    var delta;
+    if (e.keyCode == 37 && 0 < $scope.ui.heroIndex) {
+      delta = -1;
+    } else if (e.keyCode == 39 && $scope.ui.heroIndex < $scope.photos.length - 1) {
+      delta = 1;
+    } else {
+      return
     }
+    $scope.changeHero(delta);
+    e.preventDefault();
+    $scope.$apply();
   });
 
 }]);

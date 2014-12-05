@@ -8,5 +8,5 @@ elementProto.requestFullscreen =
 document.exitFullscreen =
   document.exitFullscreen ||
   document.webkitExitFullscreen ||
-  document.mozCancelFullscreen ||
+  document.mozCancelFullScreen ||
   document.msExitFullscreen;

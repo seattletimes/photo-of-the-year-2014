@@ -35,56 +35,62 @@
 
             <div class="filter-group">
               <h2><i class="fa fa-tags"></i> Topics</h2>
-              <input type="checkbox" id="selects" ng-model="filter.tags.selects">
+              <input type="checkbox" id="selects" ng-model="filter.selects">
               <label for="selects">Editor's Picks</label>
-              <input type="checkbox" id="news" ng-model="filter.tags.news">
-              <label for="news">News</label>
-              <input type="checkbox" id="sports" ng-model="filter.tags.sports">
-              <label for="sports">Sports</label>
-              <input type="checkbox" id="nature" ng-model="filter.tags.nature">
+              <input type="checkbox" id="meta-news" ng-model="ui.meta.news.enabled" ng-click="changeMeta('news')">
+              <label for="meta-news">News</label>
+              <input type="checkbox" id="meta-sports" ng-model="ui.meta.sports.enabled" ng-click="changeMeta('sports')">
+              <label for="meta-sports">Sports</label>
+              <input type="checkbox" id="nature" ng-model="filter.nature">
               <label for="nature">Nature</label>
-              <input type="checkbox" id="people" ng-model="filter.tags.people">
+              <input type="checkbox" id="people" ng-model="filter.people">
               <label for="people">Portraits</label>
-              <input type="checkbox" id="landmarks" ng-model="filter.tags.landmarks">
+              <input type="checkbox" id="landmarks" ng-model="filter.landmarks">
               <label for="landmarks">Cityscapes</label>
+              <hr>
+              <a class="button clear-filters" ng-click="clearFilters()">Clear all filters</a>
             </div>
 
-            <div class="subgroup filter-group" ng-class="{'show-subgroup': filter.tags.news }">
+            <div class="subgroup filter-group" ng-class="{'show-subgroup': ui.meta.news.enabled }">
               <h2><i class="fa fa-newspaper-o"></i> News</h2>
-              <input type="checkbox" id="oso" ng-model="filter.tags.oso">
+              <input type="checkbox" id="oso" ng-model="filter.oso">
               <label for="oso">Oso</label>
-              <input type="checkbox" id="wildfire" ng-model="filter.tags.wildfire">
+              <input type="checkbox" id="wildfire" ng-model="filter.wildfire">
               <label for="wildfire">Wildfire</label>
-              <input type="checkbox" id="marysville" ng-model="filter.tags.marysville">
+              <input type="checkbox" id="marysville" ng-model="filter.marysville">
               <label for="marysville">Marysville</label>
-              <input type="checkbox" id="spu" ng-model="filter.tags.spu">
+              <input type="checkbox" id="spu" ng-model="filter.spu">
               <label for="spu">SPU</label>
+              <input type="checkbox" id="news" ng-model="filter['other-news']">
+              <label for="news">Other news</label>
             </div>
               
-            <div class="subgroup filter-group" ng-class="{'show-subgroup': filter.tags.sports }">
+            <div class="subgroup filter-group" ng-class="{'show-subgroup': ui.meta.sports.enabled }">
               <h2><i class="fa fa-futbol-o"></i> Sports</h2>
-              <input type="checkbox" id="seahawks" ng-model="filter.tags.seahawks">
+              <input type="checkbox" id="seahawks" ng-model="filter.seahawks">
               <label for="seahawks">Seahawks</label>
-              <input type="checkbox" id="sounders" ng-model="filter.tags.sounders">
+              <input type="checkbox" id="sounders" ng-model="filter.sounders">
               <label for="sounders">Sounders</label>
-              <input type="checkbox" id="mariners" ng-model="filter.tags.mariners">
+              <input type="checkbox" id="mariners" ng-model="filter.mariners">
               <label for="mariners">Mariners</label>
-              <input type="checkbox" id="uw" ng-model="filter.tags.uw">
+              <input type="checkbox" id="uw" ng-model="filter.uw">
               <label for="uw">Huskies</label>
-              <input type="checkbox" id="storm" ng-model="filter.tags.storm">
+              <input type="checkbox" id="storm" ng-model="filter.storm">
               <label for="storm">Storm</label>
-              <input type="checkbox" id="reign" ng-model="filter.tags.reign">
+              <input type="checkbox" id="reign" ng-model="filter.reign">
               <label for="reign">Reign</label>
-              <input type="checkbox" id="prep" ng-model="filter.tags.prep">
+              <input type="checkbox" id="prep" ng-model="filter.prep">
               <label for="prep">High School</label>
+              <input type="checkbox" id="sports" ng-model="filter['other-sports']">
+              <label for="sports">Other sports</label>
             </div>
 
             <div class="filter-group">
               <h2><i class="fa fa-camera"></i> Photographers</h2>
-              <% photographers.forEach(function(photographer) { var tag = photographer.split(" ").pop(); %>
+              <% photographers.forEach(function(tag) { %>
               <div>
-                <input type="checkbox" id="<%= tag %>" ng-model="filter.tags.<%= tag %>">
-                <label for="<%= tag %>"><%= photographer %></label>
+                <input type="checkbox" id="<%= tag %>" ng-model="restrict['<%= tag %>']">
+                <label for="<%= tag %>"><%= tag %></label>
               </div>
               <% }) %>
             </div>

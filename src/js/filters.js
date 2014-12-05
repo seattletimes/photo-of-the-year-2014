@@ -1,11 +1,16 @@
 //the stream filter takes an array and a filter object, and returns matching items
+var getTags = function(hash) {
+  return Object.keys(hash).filter(function(t) { return hash[t] });
+}
+
 module.exports = function(photos, tagHash) {
-  var tags = Object.keys(tagHash).filter(function(t) { return tagHash[t] });
+  var tags = getTags(tagHash);
   if (!tags.length) return photos;
   var filtered = photos.filter(function(photo) {
-    return tags.every(function(t) {
-      return photo.tags.indexOf(t) > -1;
-    });
+    for (var i = 0; i < tags.length; i++) {
+      if (photo.tags.indexOf(tags[i]) > -1) return true;
+    }
+    return false;
   });
   return filtered;
 };

@@ -16,18 +16,26 @@ module.exports = function(grunt) {
     });
 
     parser.on("data", function(line) {
-      var photo = {
-        image:    line[0],
-        tags:     line[1],
-        caption:  line[2],
-        credit:   line[3],
-        portrait: (line[5]/line[6]) < 1
-      }
-      parsed.push(photo);
-
       var credit = line[3].toLowerCase().replace(/^\w|\s\w/g, function(match) {
         return match.toUpperCase();
       });
+
+      var tags = line[1];
+      if (tags == "sports") tags = "other-sports";
+      if (tags == "news") tags = "other-news";
+      tags = tags.split(/,\s*/);
+      tags.push(credit);
+
+      var photo = {
+        image:   line[0],
+        thumb:   line[0].replace(".JPG", "_185.jpg"),
+        tags:    tags,
+        caption: line[2],
+        credit:  credit,
+        portrait: (line[5]/line[6]) < 1
+      };
+      parsed.push(photo);
+
       photographers[credit] = true;
     });
     parser.on("finish", function() {

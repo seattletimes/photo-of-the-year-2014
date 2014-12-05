@@ -2,56 +2,36 @@
 
 var app = require("./application");
 var streamFilter = require("./filters");
+require("./fullscreen");
 
 app.controller("PhotoController", ["$scope", function($scope) {
 
   var isMobile = $scope.isMobile = require("./isMobile");
 
   var all = window.photoData;
-  var playlists = {
-    all: all
-  };
 
   $scope.ui = {
     showFilter: false,
     hero: isMobile() ? null : all[0],
-    heroIndex: 0
+    heroIndex: 0,
+    meta: {
+      news: {
+        tags: ["other-news", "oso", "wildfire", "marysville", "spu"],
+        enabled: false
+      },
+      sports: {
+        tags: ["other-sports", "seahawks", "sounders", "mariners", "uw", "storm", "reign", "prep"],
+        enabled: false
+      }
+    }
   };
-  $scope.filter = {
-    playlist: "all",
-    tags: {}
-  };
+  $scope.filter = {};
+  $scope.restrict = {};
 
   var setHero = $scope.setHero = function(photo) {
     $scope.ui.hero = photo;
     $scope.ui.heroIndex = $scope.photos.indexOf(photo);
   };
-
-  var getPhotos = function() {
-    var photos = playlists[$scope.filter.playlist];
-    var stream = streamFilter(photos, $scope.filter.tags);
-    $scope.photos = stream;
-  };
-
-  var getTags = function(o) {
-    o = o || $scope.filter.tags;
-    return Object.keys(o).filter(function(t) { return o[t] });
-  };
-
-  $scope.$watch("filter.tags", function(now, then) {
-    var len = getTags(now).length;
-    if (len && len != getTags(then).length) {
-      $scope.filter.playlist = "all";
-    }
-    getPhotos();
-  }, true);
-
-  $scope.$watch("filter.playlist", function(now, then) {
-    if (now !== then && now !== "all") {
-      $scope.filter.tags = {};
-    }
-    getPhotos();
-  });
 
   $scope.clearHero = function() {
     $scope.ui.hero = null;
@@ -64,15 +44,30 @@ app.controller("PhotoController", ["$scope", function($scope) {
     var nextPhoto = $scope.photos[index];
     setHero(nextPhoto);
   };
-
-  $scope.filterTitle = function() {
-    var keys = Object.keys($scope.filter.tags).filter(function(key) { return $scope.filter.tags[key] });
-    return [$scope.filter.playlist].concat(keys).join(", ");
+  
+  var getPhotos = function() {
+    var stream = streamFilter(all, $scope.filter);
+    //Photographers are exclusive
+    var restricted = streamFilter(stream, $scope.restrict);
+    $scope.photos = restricted;
   };
 
-  var elementProto = HTMLElement.prototype;
-  elementProto.requestFullscreen = elementProto.requestFullscreen || elementProto.webkitRequestFullscreen || elementProto.mozRequestFullScreen || elementProto.msRequestFullscreen;
-  document.exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullscreen || document.msExitFullscreen;
+  $scope.$watch("filter", getPhotos, true);
+  $scope.$watch("restrict", getPhotos, true);
+
+  $scope.changeMeta = function(key) {
+    var meta = $scope.ui.meta[key];
+    meta.tags.forEach(function(tag) {
+      $scope.filter[tag] = meta.enabled;
+    });
+  };
+
+  $scope.clearFilters = function() {
+    $scope.filter = {};
+    for (var key in $scope.ui.meta) {
+      $scope.ui.meta[key].enabled = false;
+    }
+  };
 
   $scope.launchIntoFullscreen = function(id) {
     var element = document.querySelector(id);
@@ -94,4 +89,5 @@ app.controller("PhotoController", ["$scope", function($scope) {
       $scope.$apply();
     }
   });
+
 }]);

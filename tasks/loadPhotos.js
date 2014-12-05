@@ -28,7 +28,6 @@ module.exports = function(grunt) {
 
       var photo = {
         image:   line[0],
-        thumb:   line[0].replace(".JPG", "_185.jpg"),
         tags:    tags,
         caption: line[2],
         credit:  credit,

@@ -14,6 +14,7 @@ app.controller("PhotoController", ["$scope", function($scope) {
     showFilter: false,
     hero: isMobile() ? null : all[0],
     heroIndex: 0,
+    fullscreen: false,
     meta: {
       news: {
         tags: ["other-news", "oso", "wildfire", "marysville", "spu"],
@@ -70,11 +71,13 @@ app.controller("PhotoController", ["$scope", function($scope) {
   };
 
   $scope.launchIntoFullscreen = function(id) {
+    $scope.ui.fullscreen = true;
     var element = document.querySelector(id);
     element.requestFullscreen();
   };
 
   $scope.exitFullscreen = function() {
+    $scope.ui.fullscreen = false;
     document.exitFullscreen();
   };
 

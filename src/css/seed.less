@@ -38,22 +38,6 @@
     &:hover {
       background: @light;
     }
-
-    .left {
-      display: inline;
-
-      @media @mobile {
-        display: none;
-      }
-    }
-
-    .down {
-      display: none;
-
-      @media @mobile {
-        display: inline;
-      }
-    }
   }
 }
 
@@ -234,7 +218,7 @@
 
   .gallery {
     width: calc(~"100% - 210px");
-    padding: 27px 65px 0px 65px;
+    padding: 26px 65px 0px 65px;
     position: relative;
     float: left;
 
@@ -295,16 +279,44 @@
         .inner-hero {
           display: inline-block;
           max-width: 100%;
-          position: relative;
+
+          .fullscreen() {
+            display: block;
+            background-color: black;
+            height: 100%;
+            padding: 20px 72px 0 72px;
+
+            img {
+              max-height: calc(~"100% - 30px");
+              max-width: 100%;
+            }
+
+            .arrow {
+              top: 50%;
+            }
+
+            .zoom-in {
+              display: none;
+            }
+
+            .zoom-out {
+              display: block;
+            }
+          }
+
+          &:-webkit-full-screen { .fullscreen() }
+          &:-moz-full-screen    { .fullscreen() }
+          &:-ms-fullscreen      { .fullscreen() }
+          &:full-screen         { .fullscreen() }
 
           .zoom-in, .zoom-out{
             color: #333;
             background-color: #EEE;
             position: absolute;
             padding: 5px;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
-            right: 0;
+            right: 20px;
 
             @media @mobile {
               display: none;
@@ -326,40 +338,6 @@
             letter-spacing: 1px;
           }
         }
-
-        .fullscreen() {
-          // display: block;
-          background-color: black;
-
-          // .inner-hero {
-          //   height: 100%;
-          //   padding: 20px 72px 0 72px;
-          //   width: 100%;
-          // }
-
-
-          // img {
-          //   max-height: calc(~"100% - 30px");
-          //   max-width: 100%;
-          // }
-
-          // .arrow {
-          //   top: 50%;
-          // }
-
-          // .zoom-in {
-          //   display: none;
-          // }
-
-          // .zoom-out {
-          //   display: block;
-          // }
-        }
-
-        &:-webkit-full-screen { .fullscreen() }
-        &:-moz-full-screen    { .fullscreen() }
-        &:-ms-fullscreen      { .fullscreen() }
-        &:full-screen         { .fullscreen() }
       }
 
       .description {

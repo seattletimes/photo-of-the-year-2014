@@ -42,6 +42,9 @@ app.controller("PhotoController", ["$scope", function($scope) {
     delta = delta || 1;
     var index = $scope.photos.indexOf($scope.ui.hero);
     index += delta;
+    if (index < 0 || index >= $scope.photos.length) {
+      return
+    }
     var nextPhoto = $scope.photos[index];
     setHero(nextPhoto);
   };
@@ -82,17 +85,17 @@ app.controller("PhotoController", ["$scope", function($scope) {
   };
 
   window.addEventListener("keydown", function(e) {
-    var delta;
-    if (e.keyCode == 37 && 0 < $scope.ui.heroIndex) {
-      delta = -1;
-    } else if (e.keyCode == 39 && $scope.ui.heroIndex < $scope.photos.length - 1) {
-      delta = 1;
-    } else {
-      return
+    var keyDeltas = {
+      37: -1,
+      38: -1,
+      39: 1,
+      40: 1
+    };
+    if (e.keyCode in keyDeltas) {
+      $scope.changeHero(keyDeltas[e.keyCode]);
+      e.preventDefault();
+      $scope.$apply();
     }
-    $scope.changeHero(delta);
-    e.preventDefault();
-    $scope.$apply();
   });
 
 }]);

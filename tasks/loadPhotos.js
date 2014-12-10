@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         return match.toUpperCase();
       });
 
-      var tags = line[1];
+      var tags = line[2];
       if (tags == "sports") tags = "other-sports";
       if (tags == "news") tags = "other-news";
       tags = tags.split(/,\s*/);
@@ -29,9 +29,9 @@ module.exports = function(grunt) {
       var photo = {
         image:   line[0],
         tags:    tags,
-        caption: line[2],
+        caption: line[1],
         credit:  credit,
-        portrait: (line[5]/line[6]) < 1
+        portrait: (line[4]/line[5]) < 0.95
       };
       parsed.push(photo);
 

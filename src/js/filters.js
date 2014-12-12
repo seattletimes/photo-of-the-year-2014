@@ -3,7 +3,7 @@ var getTags = function(hash) {
   return Object.keys(hash).filter(function(t) { return hash[t] });
 };
 
-module.exports = function(photos, tagHash) {
+var filter = function(photos, tagHash) {
   var tags = getTags(tagHash);
   if (!tags.length) return photos;
   var filtered = photos.filter(function(photo) {
@@ -14,3 +14,29 @@ module.exports = function(photos, tagHash) {
   });
   return filtered;
 };
+
+filter.names = {
+  selects: "Editor's Picks",
+  nature: "Nature",
+  people: "People",
+  landmarks: "CityScapes",
+
+  //news
+  oso: "Oso",
+  wildfire: "Wildfire",
+  marysville: "Marysville",
+  spu: "SPU",
+  "other-news": "Other news",
+
+  //sports
+  seahawks: "Seahawks",
+  sounders: "Sounders",
+  mariners: "Mariners",
+  uw: "Huskies",
+  storm: "Storm",
+  reign: "Reign",
+  prep: "High school",
+  "other-sports": "Other sports"
+};
+
+module.exports = filter;

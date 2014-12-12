@@ -17,11 +17,11 @@ app.controller("PhotoController", ["$scope", function($scope) {
     fullscreen: false,
     meta: {
       news: {
-        tags: ["other-news", "oso", "wildfire", "marysville", "spu"],
+        tags: ["oso", "wildfire", "marysville", "spu", "other-news"],
         enabled: false
       },
       sports: {
-        tags: ["other-sports", "seahawks", "sounders", "mariners", "uw", "storm", "reign", "prep"],
+        tags: ["seahawks", "sounders", "mariners", "uw", "storm", "reign", "prep", "other-sports"],
         enabled: false
       }
     }
@@ -36,6 +36,10 @@ app.controller("PhotoController", ["$scope", function($scope) {
 
   $scope.clearHero = function() {
     $scope.ui.hero = null;
+  };
+
+  var truthyKeys = function(o) {
+    return Object.keys(o).filter(function(k) { return o[k] });
   };
 
   $scope.changeHero = function(delta) {
@@ -71,6 +75,21 @@ app.controller("PhotoController", ["$scope", function($scope) {
     for (var key in $scope.ui.meta) {
       $scope.ui.meta[key].enabled = false;
     }
+  };
+
+  $scope.filterTitle = function() {
+    var title = "All photos";
+    var keys = truthyKeys($scope.filter);
+    if (keys.length) {
+      title = keys.map(function(k) {
+        return streamFilter.names[k] || k;
+      }).join(", ");
+    }
+    var photographers = truthyKeys($scope.restrict);
+    if (photographers.length) {
+      title += " by " + photographers.join(", ");
+    }
+    return title;
   };
 
   $scope.launchIntoFullscreen = function(id) {

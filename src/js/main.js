@@ -74,6 +74,7 @@ app.controller("PhotoController", ["$scope", function($scope) {
 
   $scope.clearFilters = function() {
     $scope.filter = {};
+    $scope.restrict = {};
     for (var key in $scope.ui.meta) {
       $scope.ui.meta[key].enabled = false;
     }

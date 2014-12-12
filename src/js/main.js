@@ -12,8 +12,9 @@ app.controller("PhotoController", ["$scope", function($scope) {
 
   $scope.ui = {
     showFilter: false,
-    hero: isMobile() ? null : all[0],
+    hero: all[0],
     heroIndex: 0,
+    showGallery: false,
     fullscreen: false,
     meta: {
       news: {
@@ -32,10 +33,11 @@ app.controller("PhotoController", ["$scope", function($scope) {
   var setHero = $scope.setHero = function(photo) {
     $scope.ui.hero = photo;
     $scope.ui.heroIndex = $scope.photos.indexOf(photo);
+    $scope.ui.showGallery = isMobile();
   };
 
   $scope.clearHero = function() {
-    $scope.ui.hero = null;
+    $scope.ui.showGallery = false;
   };
 
   var truthyKeys = function(o) {

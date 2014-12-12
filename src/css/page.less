@@ -16,6 +16,10 @@ body {
   text-align: center;
   display: block;
 
+  @media @mobile {
+    display: none;
+  }
+
   img {
     box-sizing: content-box;
     height: 30px;
@@ -24,6 +28,7 @@ body {
 }
 
 .mobile-nav {
+  display: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   height: 44px;
   padding: 10px;
@@ -33,6 +38,10 @@ body {
   width: 100%;
   background-color: #222;
   z-index: 999;
+
+  @media @mobile {
+    display: block;
+  }
 
   .logo img {
     height: 20px;

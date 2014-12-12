@@ -17,21 +17,21 @@
     <div ng-controller="PhotoController" ng-cloak>
 
       <div class="desktop-logo">
-        <a href="http://seattletimes.com" ng-show="!isMobile()">
-          <img src="./assets/logo-gray.jpg">
+        <a href="http://seattletimes.com">
+          <img src="./assets/logo-transparent.png">
         </a>
       </div>
 
       <div class="title">2014 Pictures of the Year</div>
 
-      <div class="mobile-nav" ng-show="isMobile()">
+      <div class="mobile-nav">
         <%= t.include("partials/_filterInfo.html") %>
       </div>
 
-      <div class="container clear-fix" ng-class="{ 'show-filter': showFilter, 'show-gallery': ui.hero }">
+      <div class="container clear-fix" ng-class="{ 'show-filter': ui.showFilter }">
         <div class="filter">
           <div class="inner">
-            <div class="close" ng-click="showFilter = false">&#10005;</div>
+            <div class="close" ng-click="ui.showFilter = false">&#10005;</div>
 
             <div class="filter-group">
               <h2><i class="fa fa-tags"></i> Topics</h2>
@@ -127,7 +127,7 @@
         </div>
 
         <div class="filmstrip">
-          <div ng-show="!isMobile()"><%= t.include("partials/_filterInfo.html") %></div>
+          <div class="desktop-filter"><%= t.include("partials/_filterInfo.html") %></div>
 
           <div class="images">
             <div ng-show="photos.length == 0" class="no-photos">No photos match your search.</div>

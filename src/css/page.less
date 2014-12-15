@@ -79,12 +79,54 @@ body {
   color: #EEE;
   position: fixed;
   font-size: 45px;
-  top: calc(~"50% - 45px");
-  right: calc(~"50% - 45px");
+  top: calc(~"50% - 23px");
+  right: calc(~"50% - 23px");
   z-index: 999999;
 
   &.show-loading {
     display: block;
+  }
+}
+
+.share-button {
+  letter-spacing: 0;
+  position: absolute;
+  top: 15px;
+  right: 8px;
+  z-index: 99999;
+
+  &.sharer-0 label {
+    color: #EEE !important;
+    background: #333 !important;
+  }
+
+  @media (max-width: 980px) {
+    top: 137px;
+  }
+
+  @media @mobile {
+    position: fixed;
+    bottom: 24px;
+    top: auto;
+    right: -48px;
+
+    span {
+      display: none;
+    }
+    
+    &.sharer-0 {
+      .social.left {
+        margin-left: -68px !important;
+      }
+
+      .social.bottom {
+        margin-top: -239px !important;
+      }
+
+      li {
+        float: none !important;
+      }
+    }
   }
 }
 

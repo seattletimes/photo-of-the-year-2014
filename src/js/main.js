@@ -5,6 +5,14 @@ var streamFilter = require("./filters");
 require("./fullscreen");
 require("./scrollTo");
 var query = require("querystring");
+var Share = require("share");
+
+new Share(".share-button", {
+  ui: {
+    flyout: "bottom left"
+    // button_text: ""
+  }
+});
 
 var isMobile = require("./isMobile");
 

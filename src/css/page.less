@@ -8,6 +8,10 @@ body {
   background-color: @charcoal;
   color: white;
   letter-spacing: 0.5px;
+
+  @media @mobile {
+    font-size: 12px;
+  }
 }
 
 .desktop-logo {
@@ -67,6 +71,20 @@ body {
 
   @media (max-width: 350px) {
     font-size: 23px;
+  }
+}
+
+.loading {
+  display: none;
+  color: #EEE;
+  position: fixed;
+  font-size: 45px;
+  top: calc(~"50% - 45px");
+  right: calc(~"50% - 45px");
+  z-index: 999999;
+
+  &.show-loading {
+    display: block;
   }
 }
 

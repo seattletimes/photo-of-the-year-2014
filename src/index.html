@@ -28,7 +28,9 @@
         <%= t.include("partials/_filterInfo.html") %>
       </div>
 
-      <div class="container clear-fix" ng-class="{ 'show-filter': ui.showFilter }">
+      <i class="loading fa fa-spin fa-spinner" ng-class="{'show-loading': ui.loading}"></i>
+
+      <div class="container clear-fix" ng-class="{ 'show-filter': ui.showFilter, 'show-gallery': ui.showGallery }">
         <div class="filter">
           <div class="inner">
             <div class="close" ng-click="ui.showFilter = false">&#10005;</div>

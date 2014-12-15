@@ -56,7 +56,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     if (typeof qs.photographers == "string") qs.photographers = [qs.photographers];
     qs.photographers.forEach(function(p) {
       $scope.restrict[p] = true;
-    })
+    });
   }
 
   var setHero = $scope.setHero = function(photo) {

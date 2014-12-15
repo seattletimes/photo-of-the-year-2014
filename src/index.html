@@ -131,7 +131,7 @@
         <div class="filmstrip">
           <div class="desktop-filter"><%= t.include("partials/_filterInfo.html") %></div>
 
-          <div class="images">
+          <div class="images" scroll-to="ui.hero.image">
             <div ng-show="photos.length == 0" class="no-photos">No photos match your search.</div>
             <img
               ng-class="{ current: photo == ui.hero, image: true }" 

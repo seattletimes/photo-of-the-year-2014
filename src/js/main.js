@@ -3,19 +3,20 @@
 var app = require("./application");
 var streamFilter = require("./filters");
 require("./fullscreen");
+require("./scrollTo");
 
 var isMobile = require("./isMobile");
 
 var cacheIndex = 0;
 var precache = function() {
-  if (cacheIndex == photoData.length) return;
+  if (cacheIndex == window.photoData.length) return;
   var img = new Image();
   img.onload = precache;
-  img.src = "./assets/" + photoData[cacheIndex++].image;
+  img.src = "./assets/" + window.photoData[cacheIndex++].image;
 };
 if (!isMobile()) precache();
 
-app.controller("PhotoController", ["$scope", function($scope) {
+app.controller("PhotoController", ["$scope", "$location", function($scope, $location) {
 
   $scope.isMobile = isMobile;
 
@@ -43,10 +44,8 @@ app.controller("PhotoController", ["$scope", function($scope) {
   $scope.restrict = {};
 
   var setHero = $scope.setHero = function(photo) {
-    console.log($scope.ui.loading)
     var img = new Image();
     img.onload = function() {
-          console.log($scope.ui.loading)
       $scope.ui.loading = false;
       $scope.ui.hero = photo;
       $scope.ui.heroIndex = $scope.photos.indexOf(photo);
@@ -70,7 +69,7 @@ app.controller("PhotoController", ["$scope", function($scope) {
     var index = $scope.photos.indexOf($scope.ui.hero);
     index += delta;
     if (index < 0 || index >= $scope.photos.length) {
-      return
+      return;
     }
     var nextPhoto = $scope.photos[index];
     setHero(nextPhoto);

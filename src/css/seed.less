@@ -33,14 +33,16 @@
     background: @blue;
     color: white;
     padding: 5px 8px;
-    margin: auto;
-    margin-top: 10px;
-    font-size: 13px;
+    margin-bottom: 4px;
+    margin-top: 26px;
+    font-size: 11px;
+    font-weight: lighter;
 
     @media @mobile {
       position: absolute;
       top: 0px;
       right: 10px;
+      margin-top: 10px;
     }
 
     &:hover {
@@ -113,7 +115,7 @@
 
         .clear-filters {
           cursor: pointer;
-          font-style: italic;
+          font-weight: bold;
 
           &:hover {
             color: @blue;
@@ -150,7 +152,6 @@
 
       &:checked + label {
         font-weight: bold;
-        color: @blue;
       }
 
       & + label::before {
@@ -190,7 +191,7 @@
     }
 
     .images { 
-      height: 772px;
+      height: 740px;
       overflow-y: scroll;
       text-align: center;
 
@@ -299,7 +300,7 @@
         text-align: center;
         
         img {
-          max-height: 711px;
+          max-height: 689px;
           max-width: 100%;
         }
 
@@ -338,8 +339,7 @@
           &:full-screen         { .fullscreen() }
 
           .zoom-in, .zoom-out{
-            color: #333;
-            background-color: #EEE;
+            color: white;
             position: absolute;
             padding: 5px;
             font-size: 18px;
@@ -351,7 +351,7 @@
             }
 
             &:hover {
-              background-color: @light;
+              color: @light;
             }
           }
 
@@ -380,7 +380,7 @@
             padding-right: 20px;
 
             img {
-              max-height: 760px;
+              max-height: 779px;
             }
 
             @media @mobile {

@@ -4,7 +4,7 @@
     <title><%= json.project.title %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:700,300italic,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,300italic' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <%= t.include("partials/_adHead.html") %>
@@ -22,7 +22,7 @@
         </a>
       </div>
 
-      <div class="title">2014 Pictures of the Year</div>
+      <div class="title">2014 Pictures of the year</div>
 
       <div class="mobile-nav">
         <%= t.include("partials/_filterInfo.html") %>
@@ -107,8 +107,8 @@
 
                 <div id="fullscreen" class="inner-hero">
                 <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
-                  <i ng-click="launchIntoFullscreen('.inner-hero')" class="zoom-in fa fa-expand"></i>
-                  <i ng-click="exitFullscreen()" class="zoom-out fa fa-compress"></i>
+                  <i ng-click="launchIntoFullscreen('.inner-hero')" title="Enter fullscreen" class="zoom-in fa fa-expand"></i>
+                  <i ng-click="exitFullscreen()" title="Exit fullscreen" class="zoom-out fa fa-compress"></i>
 
                   <img ng-src="./assets/{{ui.hero.image}}">
                   <div class="credit">{{ui.hero.credit.toUpperCase()}} / THE SEATTLE TIMES</div>
@@ -140,7 +140,10 @@
       </div>
     </div>
 
-    <div style="text-align:center">Credits...</div>
+    <div class="bottom-credits">
+      <em>Photo editors:</em> Fred Nelson, Danny Gawlowski<br>
+      <em>Interactive:</em> Audrey Carlsen
+    </div>
 
     <div class="ad">ADVERTISEMENT</div>
 

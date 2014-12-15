@@ -7,7 +7,7 @@ require("./scrollTo");
 var query = require("querystring");
 var Share = require("share");
 
-new Share(".share-button", {
+var share = window.share = new Share(".share-button", {
   ui: {
     flyout: "bottom left"
     // button_text: ""
@@ -53,7 +53,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
   $scope.restrict = {};
 
   //load query string data
-  var qs = query.parse(window.location.hash.replace(/^##/, ""));
+  var qs = query.parse(decodeURIComponent($location.hash().replace(/^##/, "")), ":", ";");
   if (qs.filters) {
     if (typeof qs.filters == "string") qs.filters = [qs.filters];
     qs.filters.forEach(function(f) {
@@ -136,7 +136,8 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     if (photographers.length) {
       title += " by " + photographers.join(", ");
     }
-    $location.hash(query.stringify({filters: keys, photographers: photographers}));
+    $location.hash(query.stringify({filters: keys, photographers: photographers}, ":", ";"));
+    share.config.url = window.location.href;
     return title;
   };
 

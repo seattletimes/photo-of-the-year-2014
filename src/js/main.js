@@ -4,6 +4,7 @@ var app = require("./application");
 var streamFilter = require("./filters");
 require("./fullscreen");
 require("./scrollTo");
+var query = require("querystring");
 
 var isMobile = require("./isMobile");
 
@@ -42,6 +43,21 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
   };
   $scope.filter = {};
   $scope.restrict = {};
+
+  //load query string data
+  var qs = query.parse(window.location.hash.replace(/^##/, ""));
+  if (qs.filters) {
+    if (typeof qs.filters == "string") qs.filters = [qs.filters];
+    qs.filters.forEach(function(f) {
+      $scope.filter[f] = true;
+    });
+  }
+  if (qs.photographers) {
+    if (typeof qs.photographers == "string") qs.photographers = [qs.photographers];
+    qs.photographers.forEach(function(p) {
+      $scope.restrict[p] = true;
+    })
+  }
 
   var setHero = $scope.setHero = function(photo) {
     var img = new Image();
@@ -112,6 +128,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     if (photographers.length) {
       title += " by " + photographers.join(", ");
     }
+    $location.hash(query.stringify({filters: keys, photographers: photographers}));
     return title;
   };
 

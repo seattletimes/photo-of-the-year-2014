@@ -52,7 +52,6 @@
 }
 
 .container {
-  min-height: 800px;
   max-width: 1200px;
   margin: auto;
   background-color: @charcoal;
@@ -64,7 +63,6 @@
     height: auto;
     margin-top: 16px;
     padding-right: 0;
-    z-index: -2;
   }
 
   .filter {
@@ -314,6 +312,10 @@
           display: inline-block;
           max-width: 100%;
 
+          img {
+            cursor: pointer;
+          }
+
           .fullscreen() {
             display: block;
             background-color: black;
@@ -327,7 +329,7 @@
             }
 
             .arrow {
-              top: 50%;
+              top: calc(~"50% - 12px");
             }
 
             .zoom-in {
@@ -340,8 +342,8 @@
             }
 
             .info {
-              top: 53px;
-              right: 22px;
+              top: calc(~"50% - 50px");
+              right: 24px;
             }
 
             .show-caption-box {

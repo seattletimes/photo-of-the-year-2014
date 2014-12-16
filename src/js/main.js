@@ -27,11 +27,12 @@ var precache = function() {
 if (!isMobile()) precache();
 
 //Disable fullscreen on mobile/tablet devices
+var isTouch = false;
 try {  
   document.createEvent("TouchEvent");
   document.getElementById("zoom-in").classList.add("disable-fullscreen");
+  isTouch = true;
 } catch (e) {
-  document.getElementById("zoom-in").classList.remove("disable-fullscreen");
 }
 
 app.controller("PhotoController", ["$scope", "$location", function($scope, $location) {
@@ -152,9 +153,11 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
   };
 
   $scope.launchIntoFullscreen = function(id) {
-    $scope.ui.fullscreen = true;
-    var element = document.querySelector(id);
-    element.requestFullscreen();
+    if (!isTouch) {
+      $scope.ui.fullscreen = true;
+      var element = document.querySelector(id);
+      element.requestFullscreen();
+    }
   };
 
   $scope.exitFullscreen = function() {

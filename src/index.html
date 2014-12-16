@@ -12,7 +12,7 @@
 
   <body ng-app="photo-test">
 
-    <div class="ad">ADVERTISEMENT</div>
+    <div class="ad"><%= t.include("partials/_adTop.html") %></div>
 
     <div ng-controller="PhotoController" ng-cloak>
 
@@ -112,13 +112,13 @@
                   <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
                   <i ng-click="launchIntoFullscreen('.inner-hero')" title="Enter fullscreen" class="zoom-in fa fa-expand" id="zoom-in"></i>
                   <i ng-click="exitFullscreen()" title="Exit fullscreen" class="zoom-out fa fa-compress"></i>
-                  <i class="info fa fa-info-circle" ng-mouseover="ui.showCaptionBox = true" ng-mouseout="ui.showCaptionBox = false"></i>
+                  <i class="info fa fa-info" ng-mouseover="ui.showCaptionBox = true" ng-mouseout="ui.showCaptionBox = false"></i>
 
                   <div class="caption-box" ng-class="{'show-caption-box': ui.showCaptionBox}">
                     <div class="caption-text">{{ui.hero.caption}}</div>
                   </div>
 
-                  <img ng-src="./assets/{{ui.hero.image}}">
+                  <img ng-click="launchIntoFullscreen('.inner-hero')" ng-src="./assets/{{ui.hero.image}}">
                   <div class="credit">{{ui.hero.credit.toUpperCase()}} / THE SEATTLE TIMES</div>
                 <i class="arrow next fa fa-chevron-circle-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
                 </div>
@@ -153,7 +153,7 @@
       <em>Interactive:</em> Audrey Carlsen, Thomas Wilburn
     </div>
 
-    <div class="ad">ADVERTISEMENT</div>
+    <div class="ad"><%= t.include("partials/_adBottom.html") %></div>
 
     <script>
       var photoData = <%= JSON.stringify( photos ) %>;

@@ -10,7 +10,6 @@ var Share = require("share");
 var share = window.share = new Share(".share-button", {
   ui: {
     flyout: "bottom left"
-    // button_text: ""
   }
 });
 
@@ -38,6 +37,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     heroIndex: 0,
     showGallery: false,
     fullscreen: false,
+    showCaptionBox: false,
     meta: {
       news: {
         tags: ["oso", "wildfire", "marysville", "spu", "other-news"],

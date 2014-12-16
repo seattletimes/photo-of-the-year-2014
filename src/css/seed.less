@@ -333,7 +333,17 @@
               display: none;
             }
 
-            .zoom-out {
+            .zoom-out, .info {
+              z-index: 999;
+              display: block;
+            }
+
+            .info {
+              top: 53px;
+              right: 22px;
+            }
+
+            .show-caption-box {
               display: block;
             }
           }
@@ -343,8 +353,8 @@
           &:-ms-fullscreen      { .fullscreen() }
           &:full-screen         { .fullscreen() }
 
-          .zoom-in, .zoom-out{
-            color: white;
+          .zoom-in, .zoom-out, .info {
+            color: #EEE;
             position: absolute;
             padding: 5px;
             font-size: 18px;
@@ -360,8 +370,22 @@
             }
           }
 
-          .zoom-out {
+          .zoom-out, .info, .caption-box {
             display: none;
+          }
+
+          .caption-box {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            left:0;
+            right: 0;
+            padding: 8px 4px;
+          }
+
+          .caption-text {
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
           }
 
           .credit {

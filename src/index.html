@@ -108,11 +108,15 @@
             <div class="content" ng-class="{portrait: ui.hero.portrait}">
               <div class="hero" ng-class="{fullscreen: ui.fullscreen}">
 
-
                 <div id="fullscreen" class="inner-hero">
-                <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
+                  <i class="arrow previous fa fa-chevron-circle-left" ng-click="changeHero(-1)" ng-show="ui.heroIndex > 0"></i>
                   <i ng-click="launchIntoFullscreen('.inner-hero')" title="Enter fullscreen" class="zoom-in fa fa-expand"></i>
                   <i ng-click="exitFullscreen()" title="Exit fullscreen" class="zoom-out fa fa-compress"></i>
+                  <i class="info fa fa-info-circle" ng-mouseover="ui.showCaptionBox = true" ng-mouseout="ui.showCaptionBox = false"></i>
+
+                  <div class="caption-box" ng-class="{'show-caption-box': ui.showCaptionBox}">
+                    <div class="caption-text">{{ui.hero.caption}}</div>
+                  </div>
 
                   <img ng-src="./assets/{{ui.hero.image}}">
                   <div class="credit">{{ui.hero.credit.toUpperCase()}} / THE SEATTLE TIMES</div>

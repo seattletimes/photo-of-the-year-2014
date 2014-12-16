@@ -357,19 +357,21 @@
           &:full-screen         { .fullscreen() }
 
           .zoom-in, .zoom-out, .info {
-            color: #EEE;
+            color: @white;
             position: absolute;
             padding: 5px;
             font-size: 18px;
             cursor: pointer;
             right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 1px;
 
             @media @mobile {
               display: none;
             }
 
             &:hover {
-              color: @light;
+              background: rgba(255, 255, 255, 0.25);
             }
           }
 
@@ -454,7 +456,7 @@
       }
 
       &:hover {
-        color: @light;
+        color: @white;
       }
 
       &.previous {

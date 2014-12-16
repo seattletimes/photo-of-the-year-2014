@@ -7,6 +7,7 @@ require("./scrollTo");
 var query = require("querystring");
 var Share = require("share");
 
+//Share button
 var share = window.share = new Share(".share-button", {
   ui: {
     flyout: "bottom left"
@@ -15,6 +16,7 @@ var share = window.share = new Share(".share-button", {
 
 var isMobile = require("./isMobile");
 
+//Pre-load images for desktop
 var cacheIndex = 0;
 var precache = function() {
   if (cacheIndex == window.photoData.length) return;
@@ -24,6 +26,14 @@ var precache = function() {
 };
 if (!isMobile()) precache();
 
+//Disable fullscreen on mobile/tablet devices
+try {  
+  document.createEvent("TouchEvent");
+  document.getElementById("zoom-in").classList.add("disable-fullscreen");
+} catch (e) {
+  document.getElementById("zoom-in").classList.remove("disable-fullscreen");
+}
+
 app.controller("PhotoController", ["$scope", "$location", function($scope, $location) {
 
   $scope.isMobile = isMobile;
@@ -32,11 +42,11 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
 
   $scope.ui = {
     loading: false,
-    showFilter: false,
     hero: all[0],
     heroIndex: 0,
-    showGallery: false,
     fullscreen: false,
+    showFilter: false,
+    showGallery: false,
     showCaptionBox: false,
     meta: {
       news: {
@@ -152,6 +162,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     document.exitFullscreen();
   };
 
+  //Keyboard arrows to navigate through filmstrip
   window.addEventListener("keydown", function(e) {
     var keyDeltas = {
       37: -1,

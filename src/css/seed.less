@@ -64,6 +64,7 @@
     height: auto;
     margin-top: 16px;
     padding-right: 0;
+    z-index: -2;
   }
 
   .filter {
@@ -367,6 +368,12 @@
 
             &:hover {
               color: @light;
+            }
+          }
+
+          .zoom-in.disable-fullscreen {
+            @media (max-width: 1024px) {
+              display: none;
             }
           }
 

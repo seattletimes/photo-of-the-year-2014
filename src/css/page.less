@@ -15,20 +15,19 @@ body {
 }
 
 .desktop-logo {
-  width: 100%;
-  position: relative;
-  top: 15px;
   text-align: center;
-  display: block;
+  padding-top: 20px;
 
   @media @mobile {
     display: none;
   }
 
+  a {
+    display: block;
+  }
+
   img {
-    box-sizing: content-box;
     height: 30px;
-    margin: 10px;
   }
 }
 
@@ -53,6 +52,26 @@ body {
   }
 }
 
+.overtitle {
+  text-align: center;
+  text-transform: uppercase;
+  color: #CCC;
+  font-size: 12px;
+
+  @media @mobile {
+    margin-top: 54px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #CCC;
+
+    &:hover {
+      color: @light;
+    }
+  }
+}
+
 .title {
   font-size: 48px;
   font-family: @hed;
@@ -62,7 +81,7 @@ body {
 
   @media @mobile {
     font-size: 36px;
-    margin-top: 58px;
+    margin-top: 6px;
   }
 
   @media (max-width: 500px) {

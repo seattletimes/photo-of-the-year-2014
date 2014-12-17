@@ -18,8 +18,8 @@ var filter = function(photos, tagHash) {
 filter.names = {
   selects: "Editor's Picks",
   nature: "Nature",
-  people: "People",
-  landmarks: "CityScapes",
+  people: "Portraits",
+  landmarks: "Cityscapes",
 
   //news
   oso: "Oso",

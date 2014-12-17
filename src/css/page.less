@@ -4,43 +4,75 @@
 
 body {
   font-family: @sans;
-  font-size: 14px;
+  font-size: 16px;
   background-color: @charcoal;
   color: white;
   letter-spacing: 0.5px;
 
   @media @mobile {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
-.desktop-logo {
-  text-align: center;
-  padding-top: 20px;
+// .desktop-logo {
+//   text-align: center;
+//   padding-top: 20px;
+
+//   @media @mobile {
+//     display: none;
+//   }
+
+//   a {
+//     display: block;
+//   }
+
+//   img {
+//     height: 30px;
+//   }
+// }
+
+nav {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &.top-bar {
+    border-bottom: 1px solid @white;
+    position: relative;
+
+    .logo {
+      width: 100%;
+      position: relative;
+      top: 30px;
+      text-align: center;
+      display: block;
+
+      img {
+        box-sizing: content-box;
+        height: 30px;
+        background: #333;
+        padding: 10px;
+        border: none;
+      }
+    }
+  }
 
   @media @mobile {
     display: none;
   }
-
-  a {
-    display: block;
-  }
-
-  img {
-    height: 30px;
-  }
 }
+
 
 .mobile-nav {
   display: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   height: 44px;
-  padding: 10px;
+  padding: 5px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #222;
+  background-color: black;
   z-index: 999;
 
   @media @mobile {
@@ -48,48 +80,59 @@ body {
   }
 
   .logo img {
-    height: 20px;
+    height: 25px;
   }
 }
 
-.overtitle {
-  text-align: center;
-  text-transform: uppercase;
-  color: #CCC;
-  font-size: 12px;
+.body-wrapper {
+  position: relative;
 
   @media @mobile {
-    margin-top: 54px;
+    top: 44px;
   }
+}
 
-  a {
-    text-decoration: none;
-    color: #CCC;
+.header {
+  position: relative;
+  margin: 1em auto;
 
-    &:hover {
-      color: @light;
+  .title {
+    font-size: 4em;
+    line-height: 1.6em;
+    font-family: @hed;
+    font-weight: normal;
+    letter-spacing: 0px;
+    text-align: center;
+    margin: 10px auto 0;
+
+    @media @mobile {
+      font-size: 36px;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 26px;
+    }
+
+    @media (max-width: 350px) {
+      font-size: 23px;
     }
   }
-}
 
-.title {
-  font-size: 48px;
-  font-family: @hed;
-  letter-spacing: 0px;
-  text-align: center;
-  margin-top: 11px;
+  .overtitle {
+    padding: 1em auto;
+    text-align: center;
+    text-transform: uppercase;
+    color: #CCC;
+    font-size: 12px;
 
-  @media @mobile {
-    font-size: 36px;
-    margin-top: 6px;
-  }
+    a {
+      text-decoration: none;
+      color: #CCC;
 
-  @media (max-width: 500px) {
-    font-size: 26px;
-  }
-
-  @media (max-width: 350px) {
-    font-size: 23px;
+      &:hover {
+        color: @light;
+      }
+    }
   }
 }
 
@@ -165,8 +208,7 @@ body {
 .ad {
   height: 90px;
   width: 750px;
-  margin: auto;
-  margin-top: 10px;
+  margin: 10px auto;
 
   @media @mobile {
     display: none;

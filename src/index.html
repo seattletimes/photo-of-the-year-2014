@@ -14,6 +14,8 @@
 
     <div class="ad"><%= t.include("partials/_adTop.html") %></div>
 
+    <a class="share-button"></a>
+
     <div ng-controller="PhotoController" ng-cloak class="body-wrapper">
 
 <!--       <div class="desktop-logo">
@@ -32,8 +34,6 @@
         <h1 class="title">2014 Pictures of the Year</h1>
         <div class="overtitle"><a href="http://seattletimes.com/html/pacificnw/">As featured in Pacific NW Magazine</a></div>
       </header>
-
-      <a class="share-button"></a>
 
       <div class="mobile-nav">
         <%= t.include("partials/_filterInfo.html") %>

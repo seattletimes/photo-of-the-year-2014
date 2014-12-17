@@ -142,29 +142,33 @@
     }
 
     h2 {
-      margin: 10px 0 0 0;
+      margin: 10px 0 5px 0;
       font-weight: normal;
     }
 
     input {
       display: none;
 
-      &:checked + label {
-        //font-weight: bold;
-      }
-
       & + label::before {
-        content: "\2610";
+        position: relative;
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        content: "\f096";
+        margin-right: 4px;
       }
 
       &:checked + label::before {
-        content: "\2611";
+        content: "\f14a";
       }
     }
 
     label {
       display: block;
       cursor: pointer;
+      padding: 5px 0;
 
       &::before {
         font-size: 20px;
@@ -359,7 +363,7 @@
           .zoom-in, .zoom-out, .info {
             color: @white;
             position: absolute;
-            padding: 5px;
+            padding: 4px;
             font-size: 18px;
             cursor: pointer;
             right: 20px;
@@ -461,7 +465,7 @@
       }
 
       &.previous {
-        left: 22px;
+        left: 25px;
 
         @media @mobile {
           left: calc(~"50% - 30px");
@@ -469,7 +473,7 @@
       }
 
       &.next {
-        right: 22px;
+        right: 25px;
 
         @media @mobile {
           right: calc(~"50% - 30px");

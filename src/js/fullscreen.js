@@ -5,6 +5,10 @@ elementProto.requestFullscreen =
   elementProto.mozRequestFullScreen ||
   elementProto.msRequestFullscreen;
 
+if (!elementProto.requestFullscreen) {
+  document.body.className += " no-fullscreen";
+}
+
 document.exitFullscreen =
   document.exitFullscreen ||
   document.webkitExitFullscreen ||

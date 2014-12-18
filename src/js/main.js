@@ -30,7 +30,7 @@ if (!isMobile()) precache();
 var isTouch = false;
 try {  
   document.createEvent("TouchEvent");
-  document.getElementById("zoom-in").classList.add("disable-fullscreen");
+  document.body.className += " no-fullscreen";
   isTouch = true;
 } catch (e) {
 }

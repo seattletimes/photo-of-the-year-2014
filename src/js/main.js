@@ -68,7 +68,11 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
   if (qs.filters) {
     if (typeof qs.filters == "string") qs.filters = [qs.filters];
     qs.filters.forEach(function(f) {
+      var meta = $scope.ui.meta;
       $scope.filter[f] = true;
+      //turn on meta categories
+      if (meta.news.tags.indexOf(f) > -1) meta.news.enabled = true;
+      if (meta.sports.tags.indexOf(f) > -1) meta.sports.enabled = true;
     });
   }
   if (qs.photographers) {

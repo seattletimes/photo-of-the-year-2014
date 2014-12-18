@@ -124,15 +124,21 @@ nav {
 
 .loading {
   display: none;
-  color: #EEE;
   position: fixed;
-  font-size: 45px;
   top: calc(~"50% - 23px");
   right: calc(~"50% - 23px");
   z-index: 999999;
+  background: #EEE;
+  padding: 5px;
+  broder-radius: 2px;
 
   &.show-loading {
     display: block;
+  }
+
+  i {
+    color: #333;
+    font-size: 45px;
   }
 }
 

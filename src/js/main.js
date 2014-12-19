@@ -28,12 +28,11 @@ if (!isMobile()) precache();
 
 //Disable fullscreen on mobile/tablet devices
 var isTouch = false;
-try {  
+try {
   document.createEvent("TouchEvent");
   document.body.className += " no-fullscreen";
   isTouch = true;
-} catch (e) {
-}
+} catch (e) { /* no touchscreen */ }
 
 app.controller("PhotoController", ["$scope", "$location", function($scope, $location) {
 
@@ -41,46 +40,15 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
 
   var all = window.photoData;
 
-  $scope.ui = {
-    loading: false,
-    hero: all[0],
-    heroIndex: 0,
-    fullscreen: false,
-    showFilter: false,
-    showGallery: false,
-    showCaptionBox: false,
-    meta: {
-      news: {
-        tags: ["oso", "wildfire", "marysville", "spu", "other-news"],
-        enabled: false
-      },
-      sports: {
-        tags: ["seahawks", "sounders", "mariners", "uw", "storm", "reign", "prep", "other-sports"],
-        enabled: false
-      }
-    }
+  var getPhotos = function() {
+    var stream = streamFilter(all, $scope.filter);
+    //Photographers are exclusive
+    var restricted = streamFilter(stream, $scope.restrict);
+    $scope.photos = restricted;
   };
-  $scope.filter = {};
-  $scope.restrict = {};
 
-  //load query string data
-  var qs = query.parse(decodeURIComponent($location.hash().replace(/^##/, "")), ":", ";");
-  if (qs.filters) {
-    if (typeof qs.filters == "string") qs.filters = [qs.filters];
-    qs.filters.forEach(function(f) {
-      var meta = $scope.ui.meta;
-      $scope.filter[f] = true;
-      //turn on meta categories
-      if (meta.news.tags.indexOf(f) > -1) meta.news.enabled = true;
-      if (meta.sports.tags.indexOf(f) > -1) meta.sports.enabled = true;
-    });
-  }
-  if (qs.photographers) {
-    if (typeof qs.photographers == "string") qs.photographers = [qs.photographers];
-    qs.photographers.forEach(function(p) {
-      $scope.restrict[p] = true;
-    });
-  }
+  $scope.$watch("filter", getPhotos, true);
+  $scope.$watch("restrict", getPhotos, true);
 
   var setHero = $scope.setHero = function(photo) {
     var img = new Image();
@@ -113,16 +81,6 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     var nextPhoto = $scope.photos[index];
     setHero(nextPhoto);
   };
-  
-  var getPhotos = function() {
-    var stream = streamFilter(all, $scope.filter);
-    //Photographers are exclusive
-    var restricted = streamFilter(stream, $scope.restrict);
-    $scope.photos = restricted;
-  };
-
-  $scope.$watch("filter", getPhotos, true);
-  $scope.$watch("restrict", getPhotos, true);
 
   $scope.changeMeta = function(key) {
     var meta = $scope.ui.meta[key];
@@ -151,7 +109,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     if (photographers.length) {
       title += " by " + photographers.join(", ");
     }
-    $location.hash(query.stringify({filters: keys, photographers: photographers}, ":", ";"));
+    $location.hash(query.stringify({filters: keys, photographers: photographers}, ";", ":"));
     share.config.url = window.location.href;
     return title;
   };
@@ -183,5 +141,50 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
       $scope.$apply();
     }
   });
+
+  $scope.filter = {};
+  $scope.restrict = {};
+
+  $scope.ui = {
+    loading: false,
+    hero: null,
+    heroIndex: 0,
+    fullscreen: false,
+    showFilter: false,
+    showGallery: false,
+    showCaptionBox: false,
+    meta: {
+      news: {
+        tags: ["oso", "wildfire", "marysville", "spu", "other-news"],
+        enabled: false
+      },
+      sports: {
+        tags: ["seahawks", "sounders", "mariners", "uw", "storm", "reign", "prep", "other-sports"],
+        enabled: false
+      }
+    }
+  };
+
+  //load query string data
+  var qs = query.parse(decodeURIComponent($location.hash().replace(/^##/, "")), ";", ":");
+  if (qs.filters) {
+    if (typeof qs.filters == "string") qs.filters = [qs.filters];
+    qs.filters.forEach(function(f) {
+      var meta = $scope.ui.meta;
+      $scope.filter[f] = true;
+      //turn on meta categories
+      if (meta.news.tags.indexOf(f) > -1) meta.news.enabled = true;
+      if (meta.sports.tags.indexOf(f) > -1) meta.sports.enabled = true;
+    });
+  }
+  if (qs.photographers) {
+    if (typeof qs.photographers == "string") qs.photographers = [qs.photographers];
+    qs.photographers.forEach(function(p) {
+      $scope.restrict[p] = true;
+    });
+  }
+
+  getPhotos();
+  $scope.ui.hero = $scope.photos[0];
 
 }]);

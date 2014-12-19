@@ -290,11 +290,11 @@
         text-align: center;
         
         img {
-          max-height: 701px;
+          max-height: 671px;
           max-width: 100%;
 
           @media (max-width: 1200px) {
-            max-height: 681px;
+            max-height: 650px;
           }
         }
 
@@ -406,6 +406,22 @@
 
       .description {
         padding-top: 15px;
+
+        .buy-photo {
+          padding-top: 10px;
+
+          a {
+            padding-top: 5px;
+            text-decoration: none;
+            color: #CCC;
+            font-size: 13px;
+            font-weight: lighter;
+
+            &:hover {
+              color: @blue;
+            }
+          }
+        }
       }
 
       // Only show portrait view on large screens
@@ -425,7 +441,7 @@
           }
 
           .info {
-            padding-top: 475px;
+            padding-top: 460px;
 
             @media @mobile {
               padding-top: 15px;

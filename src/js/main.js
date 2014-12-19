@@ -115,6 +115,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     }
     $location.hash(query.stringify({filters: keys, photographers: photographers}, ";", ":"));
     share.config.url = window.location.href;
+    title += " (" + $scope.photos.length + ")";
     return title;
   };
 

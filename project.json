@@ -5,14 +5,14 @@
       "path": "poy"
     },
     "live": {
-      "bucket": "",
-      "path": ""
+      "bucket": "projects.seattletimes.com",
+      "path": "2014/pictures-of-the-year"
     }
   },
   "title": "2014 Pictures of the Year",
-  "description": "",
-  "url": "",
-  "slug": "",
-  "tags": [],
+  "description": "Seattle Times photographers share their images from 2014, from the Seahawks' Super Bowl victory to the tragic Oso mudslide.",
+  "url": "http://projects.seattletimes.com/2014/pictures-of-the-year",
+  "slug": "pictures-of-the-year",
+  "tags": ["Pacific Northwest Magazine", "Pictures of the Year", "Seattle Times", "photography", "photographer", "2014"],
   "sheets": []
 }

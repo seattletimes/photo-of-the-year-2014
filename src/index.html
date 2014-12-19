@@ -124,7 +124,11 @@
                   </div>
 
                   <img ng-click="launchIntoFullscreen('.inner-hero')" ng-src="./assets/{{ui.hero.image}}">
-                  <div class="credit">{{ui.hero.credit.toUpperCase()}} / THE SEATTLE TIMES</div>
+
+                  <div class="credit-container">
+                    <div class="index">{{ui.heroIndex + 1}} of {{ui.photoLength}}</div>
+                    <div class="credit">{{ui.hero.credit.toUpperCase()}} / THE SEATTLE TIMES</div>
+                  </div>
                 <i class="arrow next fa fa-chevron-right" ng-click="changeHero(1)" ng-show="ui.heroIndex < photos.length - 1"></i>
                 </div>
 

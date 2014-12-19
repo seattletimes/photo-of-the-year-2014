@@ -45,6 +45,9 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     //Photographers are exclusive
     var restricted = streamFilter(stream, $scope.restrict);
     $scope.photos = restricted;
+    if (!$scope.ui.photoLength) {
+      $scope.ui.photoLength = $scope.photos.length;
+    }
   };
 
   $scope.$watch("filter", getPhotos, true);
@@ -61,6 +64,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     };
     img.src = "./assets/" + photo.image;
     $scope.ui.loading = true;
+    $scope.ui.photoLength = $scope.photos.length;
   };
 
   $scope.clearHero = function() {
@@ -149,6 +153,7 @@ app.controller("PhotoController", ["$scope", "$location", function($scope, $loca
     loading: false,
     hero: null,
     heroIndex: 0,
+    photoLength: null,
     fullscreen: false,
     showFilter: false,
     showGallery: false,

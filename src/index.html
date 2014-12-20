@@ -138,7 +138,7 @@
               <div class="info">
                 <div class="description">
                   {{ui.hero.caption}}
-                  <div class="buy-photo"><a href="http://seattletimes.mycapture.com/mycapture/folder.asp?event=1883401&CategoryID=72513"><i class="fa fa-picture-o"></i> Buy Photo</a></div></div>
+                  <div class="buy-photo" ng-if="ui.hero.storeId"><a href="http://seattletimes.mycapture.com/mycapture/enlarge.asp?image={{ui.hero.storeId}}&event=1883401&CategoryID=72513"><i class="fa fa-picture-o"></i> Buy this photo</a></div></div>
               </div>
             </div>
             

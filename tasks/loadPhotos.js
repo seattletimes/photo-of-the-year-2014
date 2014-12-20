@@ -27,11 +27,12 @@ module.exports = function(grunt) {
       tags.push(credit);
 
       var photo = {
-        image:   line[0],
-        tags:    tags,
-        caption: line[1],
-        credit:  credit,
-        portrait: (line[4]/line[5]) < 0.95
+        image:    line[0],
+        tags:     tags,
+        caption:  line[1],
+        credit:   credit,
+        portrait: (line[4]/line[5]) < 0.95,
+        storeId:  line[6]
       };
       parsed.push(photo);
 
